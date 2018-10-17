@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, ScrollView } from 'react-native'
+import { Text, ScrollView, StyleSheet } from 'react-native'
 import { SearchBar, List, ListItem } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -24,7 +24,7 @@ class HomeView extends React.Component {
           }}
           placeholder='Tìm kiếm...'
         />
-        <ScrollView>
+        <ScrollView style={style.scrollView}>
           <List containerStyle={{marginBottom: 20}}>
             {
               products.map((l) => (
@@ -53,6 +53,12 @@ HomeView.navigationOptions = {
     />
   ),
 }
+
+const style = StyleSheet.create({
+  scrollView: {
+    marginBottom: 35,
+  }
+})
 
 const mapStateToProps = state => ({
   products: state.productReducers
