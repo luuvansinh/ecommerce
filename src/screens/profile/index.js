@@ -29,8 +29,20 @@ class ProfileView extends React.Component {
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <Header
-          leftComponent={<View><Text style={ComponentConst.header}>Tài khoản của tôi</Text></View>}
-        />
+          leftComponent = {
+            <View>
+              <Text style={ComponentConst.header}>Tài khoản của tôi</Text>
+            </View>
+          }
+          rightComponent = {
+            <View>
+              <Icon 
+                name= 'shopping-cart'
+                size= {30}
+                color= 'white' />
+            </View>
+          }
+          />
          
         <View style={style.profileView}>
           <Avatar
