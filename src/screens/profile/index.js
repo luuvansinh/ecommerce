@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Image } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
-import { Header, Text, Avatar, Icon } from 'react-native-elements'
+import { Header, Text, Avatar, Icon, Button } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { ComponentConst } from '../../configs'
 import style from "./style"
+import { red } from 'ansi-colors';
 
 
 class ProfileView extends React.Component {
@@ -30,6 +31,7 @@ class ProfileView extends React.Component {
         <Header
           leftComponent={<View><Text style={ComponentConst.header}>Tài khoản của tôi</Text></View>}
         />
+         
         <View style={style.profileView}>
           <Avatar
             xlarge
@@ -38,6 +40,7 @@ class ProfileView extends React.Component {
             onPress={() => console.log("Works!")}
             activeOpacity={0.7}
           />
+          
           <View style={style.profileName}>
             <View style={style.row}>
               <Icon 
@@ -55,43 +58,74 @@ class ProfileView extends React.Component {
               <Text style={style.profilePhone}>0388534943</Text>
             </View>
           </View>
+
+          <View style={style.EditProfile}>
+            <Icon 
+                name= 'edit'
+                size= {27}
+                color= 'green' />
+           </View>
         </View>
         
         <View  style={style.statisticUser}>
           <View style={style.statisticUserStase}>
-            <Text style={{fontSize: 17, color: "black"}}>Đơn hàng</Text>
+            <Text style={style.statisticText}>Đơn hàng</Text>
             <Text>2</Text>
           </View>
           <View style={style.statisticUserStaseMid}>
-            <Text style={{fontSize: 17, color: "black"}}>Sản Phẩm</Text>
+            <Text style={style.statisticText}>Sản Phẩm</Text>
             <Text>3</Text>
           </View>
           <View style={style.statisticUserStase}>
-            <Text style={{fontSize: 17, color: "black"}}>Tổng số tiền</Text>
+            <Text style={style.statisticText}>Tổng số tiền</Text>
             <Text>100,000 vnđ</Text>
           </View>
         </View>
 
-        <View style={{ marginTop: 5, justifyContent: "center"}}>
-          <View style={{flexDirection: "row", marginTop: 5, height: 50, backgroundColor: "white"}}>
-            <Icon
-              name="receipt"
-            />
-            <Text>Quản lý đơn hàng</Text>
+        <View style={style.ActionUser}>
+          <View style={style.Action}>
+              <Icon
+                marginLeft= {2}
+                name="receipt"
+              />
+              <Text style={style.ActionText}>Quản lý đặt hàng</Text>
           </View>
-          <View style={{flexDirection: "row", marginTop: 5, height: 50, backgroundColor: "white"}}>
+          <View style={style.ActionDetail}>
+            <View style={style.ActionChild}>
+              <Text style={style.ActionChildText}>Đơn hàng đang vận chuyển</Text>
+            </View>
+
+            <View style={style.ActionChild}>
+              <Text style={style.ActionChildText}>Đơn hàng thành công</Text>
+            </View>
+
+            <View style={style.ActionChild}>
+              <Text style={style.ActionChildText}>Đơn hàng đã hủy</Text>
+            </View>
+          </View>
+          <View style={style.Action}>
             <Icon
+              marginLeft= {2}
               name="location-on"
             />
-            <Text>Sổ địa chỉ</Text>
+            <Text style={style.ActionText}>Sổ địa chỉ</Text>
           </View>
-          <View style={{flexDirection: "row", marginTop: 5, height: 50, backgroundColor: "white"}}>
+          <View style={style.Action}>
             <Icon
+              marginLeft= {2}
               name="comment"
             />
-            <Text>Nhận xét của tối</Text>
+            <Text style={style.ActionText}>Nhận xét của tôi</Text>
           </View>
         </View>
+
+        <View style={style.Logout}>
+          <Button
+            raised
+            icon={{name: 'cached'}}
+            title='Đăng xuất' />
+        </View>
+        
       </SafeAreaView>
     )
   }
