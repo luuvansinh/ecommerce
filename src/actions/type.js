@@ -15,8 +15,8 @@ export {
 }
 
 // profile
-const USER = 'FETCH_USER'
+const FETCH_USER = 'FETCH_USER'
 
 export {
-  USER
+  FETCH_USER
 }
