@@ -36,6 +36,7 @@ function* getUser() {
     }
   })
   const user = JSON.parse(response._bodyInit)
+  console.log("user")
   console.log('User saga', user)
   return user
 }

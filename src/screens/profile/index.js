@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { ComponentConst } from '../../configs'
 import style from "./style"
 import { connect } from 'react-redux'
-import { fetchUser } from '../../actions'
+import { fetchUser } from '../../actions/profile'
 
 
 class ProfileView extends React.Component {
