@@ -9,21 +9,9 @@ import { red } from 'ansi-colors';
 
 
 class ProfileView extends React.Component {
-  // constructor(props) {
-  //   this.state = {
-  //     imgWidth: 0,
-  //     imgHeight: 0,
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   Image.getSize("https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg", (innerWidth, height) => {
-  //     const screenWidth = Dimensions.get('window').width
-  //     const scaleFactor = width / screenWidth
-  //     const imageHeight = height / scaleFactor
-  //     this.setState({imgWidth: screenWidth, imgHeight: imageHeight})
-  //   })
-  // }
+  componentDidMount() {
+    this.props.onFetchProducts()
+  }
   render() {
     // const { imgHeight, imgWidth } = this.state
     return (
