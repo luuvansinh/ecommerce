@@ -5,13 +5,15 @@ import { Header, Text, Avatar, Icon, Button } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { ComponentConst } from '../../configs'
 import style from "./style"
-import { red } from 'ansi-colors';
+import { connect } from 'react-redux'
+import { fetchUser } from '../../actions'
 
 
 class ProfileView extends React.Component {
   componentDidMount() {
-    this.props.onFetchProfile()
+    this.props.onFetchUser()
   }
+
   render() {
     // const { imgHeight, imgWidth } = this.state
     return (
@@ -142,11 +144,11 @@ ProfileView.navigationOptions = {
 }
 
 const mapStateToProps = state => ({
-  profile: state.productReducers
+  user: state.userReducers
 })
 
 const mapDispatchToProps = dispatch => ({
-  onFetchProfile: () => {
+  onFetchUser: () => {
     dispatch(fetchUser())
   }
 })

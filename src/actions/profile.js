@@ -1,8 +1,8 @@
-import {USER} from './type'
+import {FETCH_USER, FETCH_SUCCEEDED, FETCH_FAILED} from './type'
 
 
 const fetchUser = () => ({
-  type: USER
+  type: FETCH_USER
 })
 
 const fetchSucessUser = user => ({

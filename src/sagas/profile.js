@@ -1,14 +1,14 @@
 import { put, takeLatest } from 'redux-saga/effects'
-import { FETCHUSER, FETCH_SUCCEEDED, FETCH_PRODUCTS } from '../actions/type'
+import { FETCH_FAILED, FETCH_SUCCEEDED, FETCH_USER } from '../actions/type'
 import api from './api'
 
-
-function* fetchProducts() {
+// same controller call
+function* fetchUser() {
   try {
-    const products = yield api.getProducts()
+    const user = yield api.getUser()
     yield put({
       type: FETCH_SUCCEEDED,
-      products
+      user
     })
   } catch (error) {
     yield put({
@@ -18,10 +18,10 @@ function* fetchProducts() {
   }
 }
 
-function* watchFetchProducts() {
-  yield takeLatest(FETCH_PRODUCTS, fetchProducts)
+function* watchFetchUser() {
+  yield takeLatest(FETCH_USER, fetchUser)
 }
 
 export {
-  watchFetchProducts,
+  watchFetchUser,
 }

@@ -8,6 +8,7 @@ const METHODS = {
   patch: 'PATCH',
 }
 
+// get product
 const url = 'https://my-json-server.typicode.com/luuvansinh/json-data/products'
 
 function* getProducts() {
@@ -23,6 +24,23 @@ function* getProducts() {
   return products
 }
 
+// get user profile
+// const url = 'https://my-json-server.typicode.com/luuvansinh/json-data/products'
+
+function* getUser() {
+  const response = yield fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    }
+  })
+  const user = JSON.parse(response._bodyInit)
+  console.log('User saga', user)
+  return user
+}
+
 export default {
-  getProducts
+  getProducts,
+  getUser
 }
