@@ -1,27 +1,24 @@
 import {USER} from './type'
 
 
-const fetchProducts = () => ({
-  type: FETCH_PRODUCTS
+const fetchUser = () => ({
+  type: USER
 })
 
-const fetchSucess = user => ({
+const fetchSucessUser = user => ({
   type: FETCH_SUCCEEDED,
   user
 })
 
-const fetchFailed = error => ({
+const fetchFailedUser = error => ({
   type: FETCH_FAILED,
   error
 })
 
 export {
-  fetchProducts,
-  fetchSucess,
-  fetchFailed,
+  fetchUser,
+  fetchSucessUser,
+  fetchFailedUser,
 }
 
 
-const fetchUsers = () => ({
-  type: USER
-})

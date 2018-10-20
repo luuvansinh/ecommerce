@@ -10,7 +10,7 @@ import { red } from 'ansi-colors';
 
 class ProfileView extends React.Component {
   componentDidMount() {
-    this.props.onFetchProducts()
+    this.props.onFetchProfile()
   }
   render() {
     // const { imgHeight, imgWidth } = this.state
@@ -141,4 +141,14 @@ ProfileView.navigationOptions = {
   ),
 }
 
-export default ProfileView
+const mapStateToProps = state => ({
+  profile: state.productReducers
+})
+
+const mapDispatchToProps = dispatch => ({
+  onFetchProfile: () => {
+    dispatch(fetchUser())
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileView)
