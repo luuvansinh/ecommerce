@@ -17,9 +17,12 @@ class HomeView extends React.Component {
     dispatch({ type: 'FETCH_CATEGORIES' })
   }
 
+  handlePressItemProduct = (productId) => {
+    this.props.navigation.navigate('Product')
+  }
+
   render() {
-    const { products, promotions, categories } = this.props
-    console.log('categories', categories)
+    const { products, promotions, categories, dispatch } = this.props
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <SearchBar
@@ -38,7 +41,12 @@ class HomeView extends React.Component {
             style={style.listView}
             data={products}
             renderItem={({ item }) => (
-              <ProductItem key={item.id} product={item} />
+              <ProductItem
+                key={item.id}
+                onPressItem={this.handlePressItemProduct}
+                product={item}
+                dispatch={dispatch}
+              />
             )}
             keyExtractor={item => item.id.toString()}
           />
