@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native'
 import Swiper from 'react-native-swiper'
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 0.3,
+    flex: 1,
   },
   slide1: {
     flex: 1,
@@ -32,22 +32,31 @@ const styles = StyleSheet.create({
 })
 
 class ProductDetail extends Component {
+  static navigationOptions = {
+    title: 'Product',
+  }
+
   render() {
     return (
-      <Swiper
-        style={styles.wrapper}
-        autoplay
-      >
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Swiper</Text>
-        </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-        </View>
-      </Swiper>
+      <ScrollView>
+        <Swiper
+          style={styles.wrapper}
+          // removeClippedSubviews={false}
+          containerStyle={{width: Dimensions.get("window").width, height: 200}} 
+          autoplay
+        >
+          <View style={styles.slide1}>
+            <Text style={styles.text}>Swiper</Text>
+          </View>
+          <View style={styles.slide2}>
+            <Text style={styles.text}>Beautiful</Text>
+          </View>
+          <View style={styles.slide3}>
+            <Text style={styles.text}>And simple</Text>
+          </View>
+        </Swiper>
+        <Text>kjbdkjsnv</Text>
+      </ScrollView>
     )
   }
 }
