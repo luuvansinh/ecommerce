@@ -3,7 +3,8 @@ import productReducers from './product'
 import userReducers from './profile'
 
 const rootReducer = combineReducers({
-  productReducers
+  productReducers,
+  userReducers
 })
 
 export default rootReducer

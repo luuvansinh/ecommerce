@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects'
 import { FETCH_FAILED, FETCH_SUCCEEDED, FETCH_USER } from '../actions/type'
 import api from './api'
-
+  
 // same controller call
 function* fetchUser() {
   try {

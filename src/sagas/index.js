@@ -1,8 +1,10 @@
-import { call } from 'redux-saga/effects'
+import { call, all } from 'redux-saga/effects'
 import { watchFetchProducts } from './product'
+import { watchFetchUser } from './profile';
 
 export default function* rootSaga() {
-  yield call(watchFetchProducts),
-  yield call(watchFetchUser)
+  yield all([
+    call(watchFetchProducts),
+    call(watchFetchUser)
+  ])
 }
-
