@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { connect } from 'react-redux'
 import { ComponentConst } from '../../configs'
-import { CartItem } from '../../components'
+import { CartItem, IconLoading } from '../../components'
 import { format } from '../../utils'
 
 class CartView extends React.Component {
@@ -32,6 +32,9 @@ class CartView extends React.Component {
 
   render() {
     const { cart } = this.props
+    if (!cart.length) {
+      return <IconLoading />
+    }
     const total = cart.length ? cart.map(item => item.quantity * item.price)
       .reduce((previous, current) => previous + current) : 0
 

@@ -1,64 +1,120 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native'
+import { Text, StyleSheet, ScrollView, Dimensions, ImageBackground, View } from 'react-native'
 import Swiper from 'react-native-swiper'
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB',
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5',
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
-  }
-})
+import { connect } from 'react-redux'
+import { Card, Rating } from 'react-native-elements'
+import { IconLoading, Comment } from '../../components'
 
 class ProductDetail extends Component {
-  static navigationOptions = {
-    title: 'Product',
+  static navigationOptions = ({ navigation }) => {
+    const { state } = navigation
+    return {
+      title: state.params.title,
+    }
+  }
+
+  componentDidMount() {
+    const { dispatch, navigation } = this.props
+    dispatch({
+      type: 'FETCH_PRODUCT_DETAIL',
+      productId: navigation.getParam('productId', 1)
+    })
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch({
+      type: 'CLEAR_PRODUCT'
+    })
+  }
+  componentDidUpdate() {
+    const { navigation, product } = this.props
+    if (!navigation.getParam('title')) {
+      navigation.setParams({ title: product.name })
+    }
   }
 
   render() {
+    const { product } = this.props
+    if (!product) {
+      return <IconLoading />
+    }
     return (
       <ScrollView>
         <Swiper
           style={styles.wrapper}
-          // removeClippedSubviews={false}
-          containerStyle={{width: Dimensions.get("window").width, height: 200}} 
+          containerStyle={{width: Dimensions.get("window").width, height: 200}}
+          showsButtons
           autoplay
         >
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Swiper</Text>
-          </View>
-          <View style={styles.slide2}>
-            <Text style={styles.text}>Beautiful</Text>
-          </View>
-          <View style={styles.slide3}>
-            <Text style={styles.text}>And simple</Text>
-          </View>
+          {
+            product.images.map((item, index) => (
+              <ImageBackground key={index} source={{ uri: item }} style={styles.slide} />
+            ))
+          }
         </Swiper>
-        <Text>kjbdkjsnv</Text>
+        <View style={styles.container}>
+          <Card containerStyle={[styles.cardMargin, styles.marginBottom]}>
+            <Text style={styles.text}>{product.price} đ/kg</Text>
+            <Text style={styles.productName}>{product.name}</Text>
+            <Rating
+              style={styles.rating}
+              imageSize={10}
+              startingValue={product.rating}
+              fractions={1}
+              readonly
+            />
+          </Card>
+          <Card containerStyle={[styles.cardMargin, styles.marginBottom]}>
+            <Text>Nguồn gốc sản phẩm: {product.origin}</Text>
+          </Card>
+          <Card
+            containerStyle={[styles.cardMargin, styles.marginBottom]}
+            title="Đánh giá & nhận xét"
+          >
+            <Comment comments={product.comments}/>
+          </Card>
+        </View>
       </ScrollView>
     )
   }
 }
 
-export default ProductDetail
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
+  slide: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#e8ebef',
+    padding: 0,
+    margin: 0,
+  },
+  text: {
+    fontSize: 30,
+    color: 'red',
+    fontStyle: 'italic',
+  },
+  productName: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  cardMargin: {
+    margin: 0,
+  },
+  marginBottom: {
+    marginBottom: 10,
+  },
+  rating: {
+    marginTop: 10,
+  }
+})
+
+mapStateToProps = state => ({
+  product: state.product,
+})
+
+export default connect(mapStateToProps)(ProductDetail)

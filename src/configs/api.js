@@ -19,6 +19,10 @@ export default {
     all: () => ({
       url: '/products',
       method: METHODS.get
+    }),
+    show: (id) => ({
+      url: `/products/${id}`,
+      method: METHODS.get
     })
   },
 
@@ -26,13 +30,21 @@ export default {
     all: () => ({
       url: '/categories',
       method: METHODS.get
-    })
+    }),
+    show: (id) => ({
+      url: `/categories/${id}`,
+      method: METHODS.get, 
+    }),
   },
 
   promotion: {
     all: () => ({
       url: '/promotions',
       method: METHODS.get
+    }),
+    show: (id) => ({
+      url: `/promotions/${id}`,
+      method: METHODS.get,
     })
   }
 }

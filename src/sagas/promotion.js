@@ -4,19 +4,12 @@ import { request } from '../utils'
 
 
 function* fetchPromotions() {
-  try {
-    const api = ApiConst.promotion.all()
-    const promotions = yield call(request.call, api.url)
-    yield put({
-      type: 'FETCH_PROMOTIONS_SUCCEEDED',
-      promotions
-    })
-  } catch (error) {
-    yield put({
-      type: 'FETCH_FAILED',
-      error
-    })
-  }
+  const api = ApiConst.promotion.all()
+  const promotions = yield call(request.call, api.url)
+  yield put({
+    type: 'FETCH_PROMOTIONS_SUCCEEDED',
+    promotions
+  })
 }
 
 function* watchFetchPromotions() {

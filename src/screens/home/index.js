@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { connect } from 'react-redux'
 
-import { ProductItem } from '../../components'
+import { ProductItem, IconLoading } from '../../components'
 import PromotionList from './promotion'
 import CategoryGrid from './category'
 
@@ -18,11 +18,14 @@ class HomeView extends React.Component {
   }
 
   handlePressItemProduct = (productId) => {
-    this.props.navigation.navigate('Product')
+    this.props.navigation.navigate('Product', { productId })
   }
 
   render() {
     const { products, promotions, categories, dispatch } = this.props
+    if (!products.length && !promotions.length && !categories.length) {
+      return <IconLoading />
+    }
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <SearchBar
@@ -74,10 +77,12 @@ const style = StyleSheet.create({
   }
 })
 
-const mapStateToProps = state => ({
-  products: state.products,
-  promotions: state.promotions,
-  categories: state.categories,
-})
+const mapStateToProps = state => {
+  return {
+    products: state.products,
+    promotions: state.promotions,
+    categories: state.categories,
+  }
+}
 
 export default connect(mapStateToProps)(HomeView)

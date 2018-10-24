@@ -1,5 +1,5 @@
 import { call, all } from 'redux-saga/effects'
-import { watchFetchProducts } from './product'
+import { watchFetchProducts, watchFetchProductDetail } from './product'
 import { watchFetchPromotions } from './promotion'
 import { watchFetchCategories } from './category'
 import { watchFetchCart, watchAddToCart, watchChangeQuantity, watchRemoveItem } from './cart'
@@ -13,5 +13,6 @@ export default function* rootSaga() {
     call(watchAddToCart),
     call(watchRemoveItem),
     call(watchChangeQuantity),
+    call(watchFetchProductDetail),
   ])
 }
