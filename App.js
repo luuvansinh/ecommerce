@@ -3,6 +3,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import ProfileView from './src/screens/profile'
 import HomeView from './src/screens/home'
 import CartView from './src/screens/cart'
+import ProductView from './src/screens/product'
 
 const BottomTabs = createBottomTabNavigator(
   {
@@ -14,7 +15,7 @@ const BottomTabs = createBottomTabNavigator(
       screen: CartView,
       path: 'cart',
     },
-    People: {
+    Profile: {
       screen: ProfileView,
       path: 'profile',
     },
@@ -44,6 +45,7 @@ class DefaultScreen extends React.Component {
 const RootStack = createStackNavigator(
   {
     Home: DefaultScreen,
+    Product: ProductView,
   },
   {
     initialRouteName: 'Home',

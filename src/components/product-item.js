@@ -1,36 +1,52 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import { Avatar, Button, Rating } from 'react-native-elements'
 
 import { format } from '../utils'
 
 class ProductItem extends Component {
+  onPressItem = () => {
+    const { onPressItem, product } = this.props
+    onPressItem(product.id)
+  }
+
+  handleAddToCart = () => {
+    const { product, dispatch } = this.props
+    dispatch({
+      type: 'ADD_TO_CART',
+      product
+    })
+  }
   render() {
     const { product } = this.props
     return (
-      <View style={style.listViewItem}>
-        <Avatar
-          large
-        />
-        <View style={style.centerItem}>
-          <View>
-            <Text style={style.title}>{product.name}</Text>
-            <Text style={style.content}>{format.number(product.price)} đ</Text>
-            <Rating
-              imageSize={10}
-              startingValue={product.rating}
-              readonly
+      <TouchableHighlight onPress={this.onPressItem}>
+        <View style={style.listViewItem}>
+          <Avatar
+            source={{ uri: product.image }}
+            large
+          />
+          <View style={style.centerItem}>
+            <View>
+              <Text style={style.title}>{product.name}</Text>
+              <Text style={style.content}>{format.number(product.price)} đ/kg</Text>
+              <Rating
+                imageSize={10}
+                startingValue={product.rating}
+                readonly
+              />
+            </View>
+          </View>
+          <View style={style.rightItem}>
+            <Button
+              rounded
+              backgroundColor="#08d9d6"
+              icon={{name: 'cart-plus', type: 'font-awesome'}}
+              onPress={this.handleAddToCart}
             />
           </View>
         </View>
-        <View style={style.rightItem}>
-          <Button
-            rounded
-            backgroundColor="#08d9d6"
-            icon={{name: 'cart-plus', type: 'font-awesome'}}
-          />
-        </View>
-      </View>
+      </TouchableHighlight>
     )
   }
 }

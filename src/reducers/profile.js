@@ -1,11 +1,8 @@
 const userReducers = (user = [], action) => {
-  console.log('profile')
   console.log('ACTION', action)
   switch (action.type) {
-    case 'FETCH_USER': 
+    case 'FETCH_USER_SUCCEEDED': 
       return action.user
-    case 'FETCH_FAILED': 
-      return []
     default:
       return user
   }

@@ -1,25 +1,18 @@
-import { put, takeLatest } from 'redux-saga/effects'
-import { FETCH_FAILED, FETCH_SUCCEEDED, FETCH_USER } from '../actions/type'
-import api from './api'
-  
+import { put, takeLatest, call } from 'redux-saga/effects'
+import { ApiConst } from './../configs'
+import { request } from '../utils'
 // same controller call
 function* fetchUser() {
-  try {
-    const user = yield api.getUser()
-    yield put({
-      type: FETCH_SUCCEEDED,
-      user
-    })
-  } catch (error) {
-    yield put({
-      type: FETCH_FAILED,
-      error
-    })
-  }
+  const api = ApiConst.user.detail()
+  const user = yield call(request.call, api.url)
+  yield put({
+    type: 'FETCH_USER_SUCCEEDED',
+    user
+  })
 }
 
 function* watchFetchUser() {
-  yield takeLatest(FETCH_USER, fetchUser)
+  yield takeLatest('FETCH_USER', fetchUser)
 }
 
 export {
