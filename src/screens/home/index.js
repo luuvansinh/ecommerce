@@ -1,18 +1,25 @@
 import React from 'react'
-import { Text, ScrollView } from 'react-native'
-import { SearchBar, List, ListItem } from 'react-native-elements'
+import { Text, StyleSheet, FlatList, ScrollView } from 'react-native'
+import { SearchBar } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { connect } from 'react-redux'
 
-import { fetchProducts } from '../../actions'
+import { ProductItem } from '../../components'
+import PromotionList from './promotion'
+import CategoryGrid from './category'
 
 class HomeView extends React.Component {
   componentDidMount() {
-    this.props.onFetchProducts()
+    const { dispatch } = this.props
+    dispatch({ type: 'FETCH_PRODUCTS' })
+    dispatch({ type: 'FETCH_PROMOTIONS' })
+    dispatch({ type: 'FETCH_CATEGORIES' })
   }
+
   render() {
-    const { products } = this.props
+    const { products, promotions, categories } = this.props
+    console.log('categories', categories)
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <SearchBar
@@ -25,17 +32,16 @@ class HomeView extends React.Component {
           placeholder='Tìm kiếm...'
         />
         <ScrollView>
-          <List containerStyle={{marginBottom: 20}}>
-            {
-              products.map((l) => (
-                <ListItem
-                  avatar={{uri:l.avatar_url}}
-                  key={l.name}
-                  title={l.name}
-                />
-              ))
-            }
-          </List>
+          <PromotionList promotions={promotions} />
+          <CategoryGrid categories={categories} />
+          <FlatList
+            style={style.listView}
+            data={products}
+            renderItem={({ item }) => (
+              <ProductItem key={item.id} product={item} />
+            )}
+            keyExtractor={item => item.id.toString()}
+          />
         </ScrollView>
       </SafeAreaView>
     )
@@ -54,14 +60,16 @@ HomeView.navigationOptions = {
   ),
 }
 
-const mapStateToProps = state => ({
-  products: state.productReducers
-})
-
-const mapDispatchToProps = dispatch => ({
-  onFetchProducts: () => {
-    dispatch(fetchProducts())
+const style = StyleSheet.create({
+  listView: {
+    marginBottom: 60,
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
+const mapStateToProps = state => ({
+  products: state.products,
+  promotions: state.promotions,
+  categories: state.categories,
+})
+
+export default connect(mapStateToProps)(HomeView)

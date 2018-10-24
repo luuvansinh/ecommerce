@@ -21,7 +21,7 @@ const BottomTabs = createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: '#e91e63',
+      activeTintColor: '#ff2e63',
     },
   }
 )
