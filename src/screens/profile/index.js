@@ -1,11 +1,13 @@
 import React from 'react'
-import { View, Image, ScrollView } from 'react-native'
+import { View, Image, ScrollView, TouchableHighlight } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
 import { Header, Text, Avatar, Icon, Button } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { ComponentConst } from '../../configs'
-import style from "./style"
 import { connect } from 'react-redux'
+import style from "./style"
+import { ComponentConst } from '../../configs'
+import { IconLoading } from '../../components'
+
 
 
 class ProfileView extends React.Component {
@@ -19,6 +21,9 @@ class ProfileView extends React.Component {
     // const { imgHeight, imgWidth } = this.state
     const { user } = this.props
     console.log('USER view', user)
+    if (!user) {
+      return <IconLoading />
+    }
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <Header
@@ -72,10 +77,18 @@ class ProfileView extends React.Component {
             </View>
           </View>
           <View  style={style.statisticUser}>
-            <View style={style.statisticUserStase}>
+           <View style={style.statisticUserStase}>
+            <TouchableHighlight
+              onPress={() => {
+                console.log("press order")
+                this.props.navigation.navigate('OrderHistory')
+              }}
+            >
               <Text style={style.statisticText}>Đơn hàng</Text>
-              <Text>{user.order}</Text>
-            </View>
+            </TouchableHighlight>
+            <Text>{user.order}</Text>
+          </View>
+            
             <View style={style.statisticUserStaseMid}>
               <Text style={style.statisticText}>Sản Phẩm</Text>
               <Text>{user.product}</Text>
