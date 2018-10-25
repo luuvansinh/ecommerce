@@ -17,7 +17,7 @@ class OrderHistory extends Component {
         subtitle: 'Vice President',
         provider: 'rausach.com',
         total: 100000,
-        rate: 4,
+        rating: 3.5,
         comment: 10
       },
       {
@@ -27,14 +27,14 @@ class OrderHistory extends Component {
         subtitle: 'Vice President',
         provider: 'rausach.com',
         total: 100000,
-        rate: 4,
+        rating: 4.5,
         comment: 10
       },
     ]
     return (
       <View>
           <View style={{height: 50, backgroundColor: "green"}}>
-            <Text>Tất cả sản phẩm</Text>
+            <Text style= {{marginTop: 10, marginLeft: 5, fontSize: 20, fontWeight: "bold"}}>Tất cả sản phẩm</Text>
           </View>
 
           <ScrollView >
@@ -53,5 +53,8 @@ class OrderHistory extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  products: state.productsOrder
+})
 
-export default OrderHistory;
+export default connect(mapStateToProps)(OrderHistory)
