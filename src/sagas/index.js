@@ -3,6 +3,7 @@ import { watchFetchUser } from './profile';
 import { watchFetchProducts, watchFetchProductDetail } from './product'
 import { watchFetchPromotions } from './promotion'
 import { watchFetchCategories } from './category'
+import { watchFetchProductsOrder} from './order-product'
 import { watchFetchCart, watchAddToCart, watchChangeQuantity, watchRemoveItem } from './cart'
 
 export default function* rootSaga() {
@@ -16,5 +17,6 @@ export default function* rootSaga() {
     call(watchRemoveItem),
     call(watchChangeQuantity),
     call(watchFetchProductDetail),
+    call(watchFetchProductsOrder),
   ])
 }
