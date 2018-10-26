@@ -90,7 +90,14 @@ class ProfileView extends React.Component {
           </View>
             
             <View style={style.statisticUserStaseMid}>
+            <TouchableHighlight
+              onPress={() => {
+                console.log("press order")
+                this.props.navigation.navigate('OrderHistory')
+              }}
+            >
               <Text style={style.statisticText}>Sản Phẩm</Text>
+              </TouchableHighlight>
               <Text>{user.product}</Text>
             </View>
             <View style={style.statisticUserStase}>
