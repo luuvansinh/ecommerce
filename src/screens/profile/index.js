@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, ScrollView, TouchableHighlight } from 'react-native'
+import { View, ScrollView, TouchableHighlight } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
 import { Header, Text, Avatar, Icon, Button } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'

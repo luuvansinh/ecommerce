@@ -53,5 +53,12 @@ export default {
       url: '/users',
       method: METHODS.get,
     })
+  },
+
+  order_product: {
+    all: () => ({
+      url: '/order-products',
+      method: METHODS.get,
+    })
   }
 }
