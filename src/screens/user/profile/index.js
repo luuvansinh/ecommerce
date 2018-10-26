@@ -119,7 +119,14 @@ class ProfileView extends React.Component {
               </View>
 
               <View style={style.ActionChild}>
-                <Text style={style.ActionChildText}>Đơn hàng thành công</Text>
+                <TouchableHighlight
+                onPress={() => {
+                  console.log("press order")
+                  this.props.navigation.navigate('OrderDone')
+                  }}
+                >
+                  <Text style={style.ActionChildText}>Đơn hàng thành công</Text>
+                </TouchableHighlight>
               </View>
 
               <View style={style.ActionChild}>

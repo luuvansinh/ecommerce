@@ -5,6 +5,7 @@ import HomeView from './src/screens/home'
 import CartView from './src/screens/cart'
 import ProductView from './src/screens/product'
 import OrderHistory from './src/screens/order-history'
+import OrderDone from './src/screens/order-done'
 
 const BottomTabs = createBottomTabNavigator(
   {
@@ -48,6 +49,7 @@ const RootStack = createStackNavigator(
     Home: DefaultScreen,
     Product: ProductView,
     OrderHistory,
+    OrderDone
   },
   {
     initialRouteName: 'Home',

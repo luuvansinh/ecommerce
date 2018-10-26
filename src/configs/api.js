@@ -8,6 +8,7 @@ const METHODS = {
 
 export default {
   endPoint: 'https://my-json-server.typicode.com/luuvansinh/json-data/',
+  endPointHoc: '',
   methods: METHODS,
 
   common: {

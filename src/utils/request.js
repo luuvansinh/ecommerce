@@ -83,6 +83,23 @@ const call = (url, options = {}) => {
     .catch(err => ({ err }))
 }
 
+const callAnother = (url, options = {}) => {
+  url = ApiConst.endPointHoc + url
+  if (!options.method) {
+    options.method = ApiConst.methods.get
+  }
+  options = processOptions(options)
+  if (options.query) {
+    url += `?${options.query}`
+  }
+
+  return fetch(url, options)
+    .then(parseJSON)
+    // .then(data => ({ data }))
+    .catch(err => ({ err }))
+}
+
 export default {
   call,
+  callAnother
 }

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Avatar, Rating } from 'react-native-elements'
-import { green } from 'ansi-colors';
+
 
 class ProductOrder extends Component {
  
   render() {
     const { product } = this.props
-    console.log('order', product)
-    return (
+     return (
       <View style={{display: "flex", flexDirection: "row", marginTop: 10}}>
         <View>
           <Avatar
