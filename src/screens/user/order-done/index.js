@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, FlatList } from 'react-native';
 import { connect } from 'react-redux'
-import {OrderDoneCart} from '../../components'
+import {OrderDoneCart} from '../../../components'
 
 class OrderDone extends Component {
 
   componentDidMount() {
     this.props.dispatch({
-      type: 'FETCH_PRODUCTS_DONE'
+      type: 'FETCH_ORDERS_DONE'
     })
   }
   static navigationOptions = {
@@ -79,6 +79,9 @@ class OrderDone extends Component {
          <View style={{height: 50, backgroundColor: "green"}}>
             <Text style= {{marginTop: 10, marginLeft: 5, fontSize: 20, fontWeight: "bold"}}>Tất cả đơn hàng</Text>
           </View>
+          {  
+            orders.length == 0 && <Text style={{marginTop: 10, marginLeft: 10, color: red, fontWeight: "bold"}}>Hiện bạn chưa có đơn hàng nào!</Text>
+          }
           <ScrollView >
             <FlatList
               data={orders}
@@ -97,7 +100,7 @@ class OrderDone extends Component {
 }
 
 const mapStateToProps = state => ({
-  orders : state.products_done
+  orders : state.orders_done
 })
 
 export default connect(mapStateToProps)(OrderDone);

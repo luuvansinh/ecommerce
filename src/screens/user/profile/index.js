@@ -5,8 +5,8 @@ import { Header, Text, Avatar, Icon, Button } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { connect } from 'react-redux'
 import style from "./style"
-import { ComponentConst } from '../../configs'
-import { IconLoading } from '../../components'
+import { ComponentConst } from '../../../configs'
+import { IconLoading } from '../../../components'
 
 
 
@@ -80,7 +80,6 @@ class ProfileView extends React.Component {
            <View style={style.statisticUserStase}>
             <TouchableHighlight
               onPress={() => {
-                console.log("press order")
                 this.props.navigation.navigate('OrderHistory')
               }}
             >
@@ -92,7 +91,6 @@ class ProfileView extends React.Component {
             <View style={style.statisticUserStaseMid}>
             <TouchableHighlight
               onPress={() => {
-                console.log("press order")
                 this.props.navigation.navigate('OrderHistory')
               }}
             >
@@ -115,13 +113,18 @@ class ProfileView extends React.Component {
             </View>
             <View style={style.ActionDetail}>
               <View style={style.ActionChild}>
-                <Text style={style.ActionChildText}>Đơn hàng đang vận chuyển</Text>
+                <TouchableHighlight
+                onPress={() => {
+                  this.props.navigation.navigate('OrderDelivery')
+                  }}
+                >
+                  <Text style={style.ActionChildText}>Đơn hàng đang vận chuyển</Text>
+                </TouchableHighlight>
               </View>
 
               <View style={style.ActionChild}>
                 <TouchableHighlight
                 onPress={() => {
-                  console.log("press order")
                   this.props.navigation.navigate('OrderDone')
                   }}
                 >
@@ -130,7 +133,13 @@ class ProfileView extends React.Component {
               </View>
 
               <View style={style.ActionChild}>
-                <Text style={style.ActionChildText}>Đơn hàng đã hủy</Text>
+                <TouchableHighlight
+                  onPress={() => {
+                    this.props.navigation.navigate('OrderCancel')
+                    }}
+                >
+                  <Text style={style.ActionChildText}>Đơn hàng đã hủy</Text>
+                </TouchableHighlight>
               </View>
             </View>
             <View style={style.Action}>

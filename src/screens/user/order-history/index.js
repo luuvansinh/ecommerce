@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { View, Text, ScrollView, FlatList } from 'react-native';
-import {ProductOrder} from '../../components';
+import {ProductOrder} from '../../../components';
 
 
 class OrderHistory extends Component {

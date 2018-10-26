@@ -1,11 +1,13 @@
 import React from 'react'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
-import ProfileView from './src/screens/profile'
+import ProfileView from './src/screens/user/profile'
 import HomeView from './src/screens/home'
 import CartView from './src/screens/cart'
 import ProductView from './src/screens/product'
-import OrderHistory from './src/screens/order-history'
-import OrderDone from './src/screens/order-done'
+import OrderHistory from './src/screens/user/order-history'
+import OrderDone from './src/screens/user/order-done'
+import OrderCancel from './src/screens/user/order-cancel'
+import OrderDelivery from './src/screens/user/order-delivery'
 
 const BottomTabs = createBottomTabNavigator(
   {
@@ -49,7 +51,9 @@ const RootStack = createStackNavigator(
     Home: DefaultScreen,
     Product: ProductView,
     OrderHistory,
-    OrderDone
+    OrderDone,
+    OrderCancel,
+    OrderDelivery
   },
   {
     initialRouteName: 'Home',
