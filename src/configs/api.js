@@ -47,5 +47,19 @@ export default {
       url: `/promotions/${id}`,
       method: METHODS.get,
     })
+  },
+
+  user: {
+    detail: () => ({
+      url: '/users',
+      method: METHODS.get,
+    })
+  },
+
+  order_product: {
+    all: () => ({
+      url: '/order-products',
+      method: METHODS.get,
+    })
   }
 }

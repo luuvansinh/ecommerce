@@ -5,6 +5,7 @@ import Comment from './comment'
 import HeaderBar from './header'
 import CartBadge from './cart-badge'
 import OfflineNotice from './offline-notice'
+import ProductOrder from './product-order'
 
 export {
   ProductItem,
@@ -14,4 +15,5 @@ export {
   HeaderBar,
   CartBadge,
   OfflineNotice,
+  ProductOrder,
 }
