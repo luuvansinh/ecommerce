@@ -23,12 +23,19 @@ class ProductOrder extends Component {
             <Text style={{color: "green"}}>{product.provider}</Text>
           </View>
           <Text style= {{color: "red"}}> {product.total} vnđ</Text>
-          <Text  style={{textDecorationLine: 'line-through'}}> 90000 vnđ</Text>
-          <Rating
+          {
+            product.discount != 0 && <Text  style={{textDecorationLine: 'line-through'}}> {product.total * product.discount} vnđ</Text>
+          }
+          <View style={{flexDirection: "row"}}>
+            <View style={{marginTop: 5}}>
+              <Rating
                 imageSize={10}
                 startingValue={product.rating}
                 readonly
               />
+            </View>
+            <Text style={{ marginLeft: 15}}>({product.comment} nhận xét)</Text>
+          </View>
         </View>
       </View>
     );
