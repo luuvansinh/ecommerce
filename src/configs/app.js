@@ -1,5 +1,6 @@
 export default {
   asyncStorage: {
-    authKey: 'token'
+    authKey: 'token',
+    cartKey: 'cart',
   }  
 }
