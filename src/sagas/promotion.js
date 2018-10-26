@@ -5,10 +5,11 @@ import { request } from '../utils'
 
 function* fetchPromotions() {
   const api = ApiConst.promotion.all()
-  const promotions = yield call(request.call, api.url)
+  const response = yield call(request.call, api.url)
+  // const { data } = response.result
   yield put({
     type: 'FETCH_PROMOTIONS_SUCCEEDED',
-    promotions
+    promotions: response
   })
 }
 

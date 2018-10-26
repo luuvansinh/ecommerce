@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-navigation'
 import { Header, Text } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { ComponentConst } from '../../configs'
+import { HeaderBar } from '../../components'
 
 
 class ProfileView extends React.Component {
@@ -27,8 +28,14 @@ class ProfileView extends React.Component {
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <Header
-          leftComponent={<View><Text style={ComponentConst.header}>Tài khoản của tôi</Text></View>}
-        />
+          backgroundColor="white"
+          outerContainerStyles={{ height: 60 }}
+        >
+          <HeaderBar
+            title="Tài khoản của tôi"
+            hasCart={false}
+          />
+        </Header>
         <Image
           source={{ uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg" }}
           resizeMode="cover"

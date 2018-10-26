@@ -2,19 +2,11 @@ import React from 'react'
 import { Text, View, FlatList, ScrollView, StyleSheet } from 'react-native'
 import { Header, Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import { connect } from 'react-redux'
-import { ComponentConst } from '../../configs'
-import { CartItem, IconLoading } from '../../components'
+import { CartItem, IconLoading, HeaderBar, CartBadge } from '../../components'
 import { format } from '../../utils'
 
 class CartView extends React.Component {
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'FETCH_CART'
-    })
-  }
-
   handleChangeQuantity = (productId, value) => {
     this.props.dispatch({
       type: 'CHANGE_QUANTITY',
@@ -33,7 +25,7 @@ class CartView extends React.Component {
   render() {
     const { cart } = this.props
     if (!cart.length) {
-      return <IconLoading />
+      return <Text>Giỏ hàng của bạn đang trống</Text>
     }
     const total = cart.length ? cart.map(item => item.quantity * item.price)
       .reduce((previous, current) => previous + current) : 0
@@ -41,12 +33,14 @@ class CartView extends React.Component {
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <Header
-          leftComponent={(
-            <View>
-              <Text style={ComponentConst.header}>Giỏ hàng của tôi {!!cart.length && `(${cart.length})`}</Text>
-            </View>
-          )}
-        />
+          backgroundColor="white"
+          outerContainerStyles={{ height: 60 }}
+        >
+          <HeaderBar
+            title={`Giỏ hàng của tôi (${cart.length})`}
+            hasCart={false}
+          />
+        </Header>
         <ScrollView style={style.cartList}>
           <FlatList
             data={cart}
@@ -65,6 +59,8 @@ class CartView extends React.Component {
           </View>
           <Button
             title="Thanh toán"
+            borderRadius={20}
+            backgroundColor="#e01a2e"
           />
         </ScrollView>
       </SafeAreaView>
@@ -87,12 +83,8 @@ const style = StyleSheet.create({
 
 CartView.navigationOptions = {
   tabBarLabel: 'Giỏ hàng',
-  tabBarIcon: ({ tintColor, horizontal }) => (
-    <Ionicons
-      name="ios-cart"
-      size={horizontal ? 20 : 26}
-      style={{ color: tintColor }}
-    />
+  tabBarIcon: () => (
+    <CartBadge />
   ),
 }
 

@@ -39,8 +39,8 @@ class ProductItem extends Component {
           </View>
           <View style={style.rightItem}>
             <Button
-              rounded
-              backgroundColor="#08d9d6"
+              backgroundColor="#e01a2e"
+              borderRadius={10}
               icon={{name: 'cart-plus', type: 'font-awesome'}}
               onPress={this.handleAddToCart}
             />
