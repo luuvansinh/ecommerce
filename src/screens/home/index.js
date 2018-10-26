@@ -15,6 +15,7 @@ class HomeView extends React.Component {
     dispatch({ type: 'FETCH_PRODUCTS' })
     dispatch({ type: 'FETCH_PROMOTIONS' })
     dispatch({ type: 'FETCH_CATEGORIES' })
+    dispatch({ type: 'FETCH_CART' })
   }
 
   handlePressItemProduct = (productId) => {
@@ -35,8 +36,12 @@ class HomeView extends React.Component {
           onClearText={() => {
             console.log('clear')
           }}
+          onSubmitEditing={() => {
+            alert('Submited')
+          }}
           placeholder='Tìm kiếm...'
         />
+        {/* <OfflineNotice /> */}
         <ScrollView>
           <PromotionList promotions={promotions} />
           <CategoryGrid categories={categories} />
@@ -60,7 +65,6 @@ class HomeView extends React.Component {
 }
 
 HomeView.navigationOptions = {
-  headerTitle: <Text>My header</Text>,
   tabBarLabel: 'Trang chủ',
   tabBarIcon: ({ tintColor, horizontal }) => (
     <Ionicons
@@ -74,15 +78,14 @@ HomeView.navigationOptions = {
 const style = StyleSheet.create({
   listView: {
     marginBottom: 60,
+    backgroundColor: 'white',
   }
 })
 
-const mapStateToProps = state => {
-  return {
-    products: state.products,
-    promotions: state.promotions,
-    categories: state.categories,
-  }
-}
+const mapStateToProps = state => ({
+  products: state.products,
+  promotions: state.promotions,
+  categories: state.categories,
+})
 
 export default connect(mapStateToProps)(HomeView)

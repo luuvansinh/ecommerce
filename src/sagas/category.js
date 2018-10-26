@@ -5,10 +5,11 @@ import { request } from '../utils'
 
 function* fetchCategories() {
   const api = ApiConst.category.all()
-  const categories = yield call(request.call, api.url)
+  const response = yield call(request.call, api.url)
+  // const { result } = response
   yield put({
     type: 'FETCH_CATEGORIES_SUCCEEDED',
-    categories
+    categories: response
   })
 }
 

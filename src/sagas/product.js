@@ -8,10 +8,11 @@ import { ApiConst } from '../configs'
 
 function* fetchProducts() {
   const api = ApiConst.product.all()
-  const products = yield call(request.call, api.url)
+  const response = yield call(request.call, api.url)
+  // const { data } = response.result
   yield put({
     type: 'FETCH_PRODUCTS_SUCCEEDED',
-    products
+    products: response
   })
 }
 

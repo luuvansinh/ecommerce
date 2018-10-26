@@ -13,7 +13,7 @@ class CategoryGrid extends Component {
         renderItem={item => (
           <TouchableHighlight onPress={() => alert('Grid pressed')}>
             <ImageBackground
-              source={{ uri: item.image }}
+              source={{ uri: 'https://picsum.photos/300/200/?image=222' }}
               style={styles.itemContainer}
             >
               <Text style={styles.itemName}>{item.name}</Text>

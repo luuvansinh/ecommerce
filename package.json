@@ -7,10 +7,15 @@
     "test": "jest"
   },
   "dependencies": {
+    "antd-mobile-rn": "^2.3.0",
+    "babel-plugin-import": "^1.10.0",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-elements": "^0.19.1",
+    "react-native-icon-badge": "^1.1.3",
     "react-native-material-bottom-navigation": "^1.0.1",
+    "react-native-search-bar": "^3.4.2",
+    "react-native-simple-dialogs": "^1.0.0",
     "react-native-snap-carousel": "^3.7.5",
     "react-native-super-grid": "^2.4.3",
     "react-native-swiper": "^1.5.13",
@@ -18,6 +23,7 @@
     "react-navigation": "^2.17.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.1",
+    "redux-form": "^7.4.2",
     "redux-saga": "^0.16.2"
   },
   "devDependencies": {
