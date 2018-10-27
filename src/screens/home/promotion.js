@@ -4,7 +4,7 @@ import { StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity } from 
 
 class PromotionList extends Component {
   render() {
-    const { promotions } = this.props
+    const { promotions, navigation } = this.props
     return (
       <Swiper
         style={styles.wrapper}
@@ -17,7 +17,7 @@ class PromotionList extends Component {
             <ImageBackground key={item.id} source={{ uri: 'https://picsum.photos/300/200/?image=280' }} style={styles.slide}>
               <TouchableOpacity
                 onPress={() => {
-                  alert('Navigate to promotion page')
+                  navigation.navigate('Login')
                 }}
               >
               <Text style={styles.text}>{item.name}</Text>

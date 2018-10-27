@@ -23,7 +23,7 @@ class HomeView extends React.Component {
   }
 
   render() {
-    const { products, promotions, categories, dispatch } = this.props
+    const { products, promotions, categories, dispatch, navigation } = this.props
     if (!products.length && !promotions.length && !categories.length) {
       return <IconLoading />
     }
@@ -43,8 +43,8 @@ class HomeView extends React.Component {
         />
         {/* <OfflineNotice /> */}
         <ScrollView>
-          <PromotionList promotions={promotions} />
-          <CategoryGrid categories={categories} />
+          <PromotionList promotions={promotions} navigation={navigation} />
+          <CategoryGrid categories={categories} navigation={navigation} />
           <FlatList
             style={style.listView}
             data={products}
