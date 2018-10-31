@@ -5,6 +5,7 @@ import { watchFetchPromotions } from './promotion'
 import { watchFetchCategories } from './category'
 import { watchFetchProductsOrder} from './order-product'
 import { watchFetchCart, watchAddToCart, watchChangeQuantity, watchRemoveItem } from './cart'
+import { watchLogin } from './common'
 
 export default function* rootSaga() {
   yield all([
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     call(watchChangeQuantity),
     call(watchFetchProductDetail),
     call(watchFetchProductsOrder),
+    call(watchLogin),
   ])
 }

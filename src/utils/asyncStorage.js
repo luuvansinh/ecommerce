@@ -10,7 +10,17 @@ const getCart = async () => {
   return cart ? JSON.parse(cart) : []
 }
 
+// const setItem = async (token) => {
+//   await AsyncStorage.setItem(AppConst.asyncStorage.authKey, token)
+// }
+
+// const removeAuthKey = async () => {
+//   await AsyncStorage.removeItem(AppConst.asyncStorage.authKey)
+// }
+
 export default {
   getCart,
   updateCart,
+  // setAuthKey,
+  // removeAuthKey,
 }

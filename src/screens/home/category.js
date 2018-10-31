@@ -4,14 +4,14 @@ import GridView from 'react-native-super-grid'
 
 class CategoryGrid extends Component {
   render() {
-    const { categories } = this.props
+    const { categories, navigation } = this.props
     return (
       <GridView
         itemDimension={130}
         items={categories}
         style={styles.gridView}
         renderItem={item => (
-          <TouchableHighlight onPress={() => alert('Grid pressed')}>
+          <TouchableHighlight onPress={() => navigation.navigate('SignUp')}>
             <ImageBackground
               source={{ uri: 'https://picsum.photos/300/200/?image=222' }}
               style={styles.itemContainer}
