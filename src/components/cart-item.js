@@ -1,51 +1,55 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight } from 'react-native'
-import { Avatar } from 'react-native-elements'
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import { format } from '../utils'
+import React, { Component } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableHighlight
+} from "react-native";
+import { Avatar } from "react-native-elements";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { format } from "../utils";
 
 class CartItem extends Component {
   render() {
-    const { product, onChangeQuantity, onRemoveItem } = this.props
+    const { product, onChangeQuantity, onRemoveItem } = this.props;
     return (
       <View style={style.listViewItem}>
-        <Avatar
-          source={{ uri: product.image }}
-          large
-        />
+        <Avatar source={{ uri: product.image }} large />
         <View style={style.centerItem}>
           <View>
             <Text style={style.title}>{product.name}</Text>
-            <Text style={style.content}>{format.number(product.price)} đ/kg</Text>
+            <Text style={style.content}>
+              {format.number(product.price)} đ/kg
+            </Text>
           </View>
         </View>
         <View style={style.rightItem}>
           <TouchableOpacity
             onPress={() => {
-              onRemoveItem(product.id)
+              onRemoveItem(product.id);
             }}
             style={{ marginBottom: 10 }}
           >
-            <Ionicons
-              name="ios-trash"
-              size={25}
-            />
+            <Ionicons name="ios-trash" size={25} />
           </TouchableOpacity>
           <View style={style.cartEdit}>
             <TouchableHighlight
               style={style.editButtonLeft}
               onPress={() => {
-                onChangeQuantity(product.id, -1)
+                onChangeQuantity(product.id, -1);
               }}
-              disabled={product.quantity<2}
+              disabled={product.quantity < 2}
             >
               <Text style={style.textCenter}>-</Text>
             </TouchableHighlight>
-            <Text style={[style.quantityItem, style.textCenter]}>{product.quantity}</Text>
+            <Text style={[style.quantityItem, style.textCenter]}>
+              {product.quantity}
+            </Text>
             <TouchableHighlight
               style={style.editButtonRight}
               onPress={() => {
-                onChangeQuantity(product.id, +1)
+                onChangeQuantity(product.id, +1);
               }}
             >
               <Text style={style.textCenter}>+</Text>
@@ -53,58 +57,58 @@ class CartItem extends Component {
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
 const style = StyleSheet.create({
   listViewItem: {
-    borderColor: '#252a34',
+    borderColor: "#252a34",
     borderWidth: 0.5,
     borderRadius: 3,
-    display: 'flex',
-    flexDirection: 'row',
-    margin: 6,
+    display: "flex",
+    flexDirection: "row",
+    margin: 6
   },
   centerItem: {
-    display: 'flex',
+    display: "flex",
     paddingLeft: 8,
-    justifyContent: 'center',
-    flexGrow: 1,
+    justifyContent: "center",
+    flexGrow: 1
   },
   rightItem: {
     width: 100,
-    alignItems: 'center',
+    alignItems: "center"
   },
   title: {
     fontSize: 20,
-    color: '#252a34'
+    color: "#252a34"
   },
   content: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 5
   },
   cartEdit: {
-    flexDirection: 'row',
+    flexDirection: "row",
     borderWidth: 0.5,
-    borderColor: 'black',
+    borderColor: "black",
     height: 20,
-    borderRadius: 5,
+    borderRadius: 5
   },
   editButtonLeft: {
     width: 30,
-    borderRightWidth: 0.5,
+    borderRightWidth: 0.5
   },
   textCenter: {
-    textAlign: 'center',
+    textAlign: "center"
   },
   editButtonRight: {
     width: 30,
-    borderLeftWidth: 0.5,
+    borderLeftWidth: 0.5
   },
   quantityItem: {
-    width: 30,
+    width: 30
   }
-})
+});
 
-export default CartItem
+export default CartItem;
