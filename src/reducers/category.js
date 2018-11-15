@@ -8,4 +8,16 @@ const categories = (categories = [], action) => {
   }
 }
 
-export default categories
+const category = (products = [], { type, payload }) => {
+  switch (type) {
+    case 'FETCH_CATEGORY_SUCCEEDED':
+      return payload
+    default:
+      return products
+  }
+}
+
+export {
+  categories,
+  category,
+}

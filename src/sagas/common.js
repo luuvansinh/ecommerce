@@ -7,7 +7,7 @@ import { request } from '../utils'
 
 function* login({ payload, navigation }) {
   const api = ApiConst.common.login()
-  const response = yield call(request.callServer, api.url, {
+  const response = yield call(request.call, api.url, {
     method: api.method,
     body: payload,
   })

@@ -11,7 +11,9 @@ import CategoryGrid from './category'
 
 class HomeView extends React.Component {
   componentDidMount() {
+    const { dispatch } = this.props
     this.fetchData()
+    dispatch({ type: 'FETCH_CART' })
   }
 
   onRefresh = () => {
@@ -23,7 +25,6 @@ class HomeView extends React.Component {
     dispatch({ type: 'FETCH_PRODUCTS' })
     dispatch({ type: 'FETCH_PROMOTIONS' })
     dispatch({ type: 'FETCH_CATEGORIES' })
-    dispatch({ type: 'FETCH_CART' })
   }
 
   handlePressItemProduct = (productId) => {
@@ -68,14 +69,14 @@ class HomeView extends React.Component {
             />
           )}
           keyExtractor={item => item.id.toString()}
-          onEndReached={() => dispatch({ type: 'FETCH_PRODUCTS' })}
-          onEndReachedThreshold={0.5}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={this.onRefresh}
-            />
-          }
+          // onEndReached={() => dispatch({ type: 'FETCH_PRODUCTS' })}
+          // onEndReachedThreshold={0.5}
+          // refreshControl={
+          //   <RefreshControl
+          //     refreshing={refreshing}
+          //     onRefresh={this.onRefresh}
+          //   />
+          // }
         />
       </SafeAreaView>
     )

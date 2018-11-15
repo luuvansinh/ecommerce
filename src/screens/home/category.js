@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, TouchableHighlight, ImageBackground, View } from 'react-native'
 import GridView from 'react-native-super-grid'
+import { ApiConst } from '../../configs';
 
 class CategoryGrid extends Component {
   render() {
@@ -11,9 +12,9 @@ class CategoryGrid extends Component {
         items={categories}
         style={styles.gridView}
         renderItem={item => (
-          <TouchableHighlight onPress={() => navigation.navigate('SignUp')}>
+          <TouchableHighlight onPress={() => navigation.navigate('Category', { categoryId: item.id, name: item.name })}>
             <ImageBackground
-              source={{ uri: 'https://picsum.photos/300/200/?image=222' }}
+              source={{ uri: ApiConst.host + item.image }}
               style={styles.itemContainer}
             >
               <Text style={styles.itemName}>{item.name}</Text>
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
   gridView: {
     paddingTop: 25,
     flex: 1,
+    backgroundColor: '#dce0e8'
   },
   itemContainer: {
     justifyContent: 'flex-end',
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
   },
   itemName: {
     fontSize: 16,
-    color: '#fff',
+    color: 'black',
     fontWeight: '600',
   },
   itemCode: {

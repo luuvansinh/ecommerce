@@ -19,11 +19,13 @@ class ProductItem extends Component {
   }
   render() {
     const { product } = this.props
+    const image = (product.images && product.images.length) ? product.images[0] : ''
+    console.log(image)
     return (
       <TouchableHighlight onPress={this.onPressItem}>
         <View style={style.listViewItem}>
           <Avatar
-            source={{ uri: ApiConst.host + product.image }}
+            source={{ uri: ApiConst.host + image }}
             large
           />
           <View style={style.centerItem}>

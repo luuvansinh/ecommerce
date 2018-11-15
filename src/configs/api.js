@@ -10,7 +10,7 @@ export default {
   // endPoint: 'https://my-json-server.typicode.com/luuvansinh/mock-data',
   endPoint: 'https://greengrocer.herokuapp.com/api',
   host: 'https://greengrocer.herokuapp.com',
-  endPointDev: 'https://greengrocer.herokuapp.com/api',
+  // endPointDev: 'https://greengrocer.herokuapp.com/api',
   methods: METHODS,
 
   common: {

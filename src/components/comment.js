@@ -6,6 +6,7 @@ import {
   Image,
   FlatList
 } from 'react-native'
+import { ImageConst } from '../configs';
 
 export default class Comments extends Component {
   render() {
@@ -25,10 +26,10 @@ export default class Comments extends Component {
         renderItem={({ item }) => {
           return(
             <View style={styles.container}>
-              <Image style={styles.image} source={{uri: item.author.avatar}}/>
+              <Image style={styles.image} source={{uri: ImageConst.defaultAvatar}}/>
               <View style={styles.content}>
                 <View style={styles.contentHeader}>
-                  <Text  style={styles.name}>{item.author.name}</Text>
+                  <Text  style={styles.name}>{item.user.fullname}</Text>
                   <Text style={styles.time}>
                     {item.createdAt}
                   </Text>
