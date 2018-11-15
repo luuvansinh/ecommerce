@@ -77,7 +77,8 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
     color: '#252a34'
   },
   content: {

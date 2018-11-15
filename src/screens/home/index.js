@@ -1,5 +1,5 @@
-import React from 'react'
-import { Text, StyleSheet, FlatList, ScrollView } from 'react-native'
+import React, { Fragment } from 'react'
+import { StyleSheet, FlatList, RefreshControl } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -11,6 +11,14 @@ import CategoryGrid from './category'
 
 class HomeView extends React.Component {
   componentDidMount() {
+    this.fetchData()
+  }
+
+  onRefresh = () => {
+    this.fetchData()
+  }
+
+  fetchData = () => {
     const { dispatch } = this.props
     dispatch({ type: 'FETCH_PRODUCTS' })
     dispatch({ type: 'FETCH_PROMOTIONS' })
@@ -23,10 +31,11 @@ class HomeView extends React.Component {
   }
 
   render() {
-    const { products, promotions, categories, dispatch, navigation } = this.props
+    const { products: { products, refreshing }, promotions, categories, dispatch, navigation } = this.props
     if (!products.length && !promotions.length && !categories.length) {
       return <IconLoading />
     }
+    console.log('products', products)
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <SearchBar
@@ -41,24 +50,33 @@ class HomeView extends React.Component {
           }}
           placeholder='Tìm kiếm...'
         />
-        {/* <OfflineNotice /> */}
-        <ScrollView>
-          <PromotionList promotions={promotions} navigation={navigation} />
-          <CategoryGrid categories={categories} navigation={navigation} />
-          <FlatList
-            style={style.listView}
-            data={products}
-            renderItem={({ item }) => (
-              <ProductItem
-                key={item.id}
-                onPressItem={this.handlePressItemProduct}
-                product={item}
-                dispatch={dispatch}
-              />
-            )}
-            keyExtractor={item => item.id.toString()}
-          />
-        </ScrollView>
+        <FlatList
+          style={style.listView}
+          ListHeaderComponent={(
+            <Fragment>
+              <PromotionList promotions={promotions} navigation={navigation} />
+              <CategoryGrid categories={categories} navigation={navigation} />
+            </Fragment>
+          )}
+          data={products}
+          renderItem={({ item }) => (
+            <ProductItem
+              key={item.id}
+              onPressItem={this.handlePressItemProduct}
+              product={item}
+              dispatch={dispatch}
+            />
+          )}
+          keyExtractor={item => item.id.toString()}
+          onEndReached={() => dispatch({ type: 'FETCH_PRODUCTS' })}
+          onEndReachedThreshold={0.5}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={this.onRefresh}
+            />
+          }
+        />
       </SafeAreaView>
     )
   }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import { Avatar, Button, Rating } from 'react-native-elements'
-
 import { format } from '../utils'
+import { ApiConst } from '../configs'
 
 class ProductItem extends Component {
   onPressItem = () => {
@@ -23,7 +23,7 @@ class ProductItem extends Component {
       <TouchableHighlight onPress={this.onPressItem}>
         <View style={style.listViewItem}>
           <Avatar
-            source={{ uri: product.image }}
+            source={{ uri: ApiConst.host + product.image }}
             large
           />
           <View style={style.centerItem}>
@@ -70,8 +70,9 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
-    color: '#252a34'
+    fontSize: 16,
+    color: '#252a34',
+    fontWeight: 'bold'
   },
   content: {
     fontSize: 16,
