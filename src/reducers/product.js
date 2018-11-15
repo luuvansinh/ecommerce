@@ -1,8 +1,21 @@
 
-const products = (products = [], action) => {
-  switch (action.type) {
+const initProducts = {
+  products: [],
+  filter: {
+    number_products: 10,
+    page: 0,
+    total: 1,
+  },
+  refreshing: false,
+}
+
+const products = (products = initProducts, { type, payload }) => {
+  switch (type) {
     case 'FETCH_PRODUCTS_SUCCEEDED':
-      return action.products
+      return {
+        ...products,
+        ...payload,
+      }
     default:
       return products
   }

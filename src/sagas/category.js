@@ -6,10 +6,10 @@ import { request } from '../utils'
 function* fetchCategories() {
   const api = ApiConst.category.all()
   const response = yield call(request.call, api.url)
-  // const { result } = response
+  const { result } = response
   yield put({
     type: 'FETCH_CATEGORIES_SUCCEEDED',
-    categories: response
+    categories: result
   })
 }
 

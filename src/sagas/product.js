@@ -1,4 +1,4 @@
-import { put, takeLatest, call } from 'redux-saga/effects'
+import { put, takeLatest, call, select } from 'redux-saga/effects'
 import { request } from '../utils'
 import { ApiConst } from '../configs'
 
@@ -8,20 +8,51 @@ import { ApiConst } from '../configs'
 
 function* fetchProducts() {
   const api = ApiConst.product.all()
-  const response = yield call(request.call, api.url)
-  // const { data } = response.result
   yield put({
     type: 'FETCH_PRODUCTS_SUCCEEDED',
-    products: response
+    payload: {
+      refreshing: true
+    }
+  })
+  const { products, filter } = yield select(state => state.products)
+  const { page, number_products, total } = filter
+  if (page * number_products >= total) {
+    return yield put({
+      type: 'FETCH_PRODUCTS_SUCCEEDED',
+      payload: {
+        refreshing: false
+      }
+    })
+  }
+  const response = yield call(request.call, api.url, {
+    method: api.method,
+    body: {
+      ...filter,
+      page: filter.page + 1
+    }
+  })
+  const { data, paginator } = response.result
+  
+  yield put({
+    type: 'FETCH_PRODUCTS_SUCCEEDED',
+    payload: {
+      products: [...products,...data],
+      filter: {
+        total: paginator.total,
+        number_products: paginator.per_page,
+        page: paginator.current_page
+      },
+      refreshing: false
+    }
   })
 }
 
 function* fetchProductDetail({ productId }) {
   const api = ApiConst.product.show(productId)
-  const product = yield call(request.call, api.url)
+  const response = yield call(request.call, api.url)
   yield put({
     type: 'PRODUCT_DETAIL',
-    product
+    product: response.result
   })
 }
 

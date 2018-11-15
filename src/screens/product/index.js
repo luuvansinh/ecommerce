@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Card, Rating, Button } from 'react-native-elements'
 import { IconLoading, Comment, HeaderBar } from '../../components'
 import CommentDialog from './comment-dialog';
+import styles from './style'
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -58,6 +59,7 @@ class ProductDetail extends Component {
     if (!product) {
       return <IconLoading />
     }
+    console.log('product', product)
     return (
       <ScrollView>
         <Swiper
@@ -79,7 +81,7 @@ class ProductDetail extends Component {
               <Rating
                 style={styles.rating}
                 imageSize={10}
-                startingValue={product.rating}
+                startingValue={product.ratings.avg}
                 fractions={1}
                 readonly
               />
@@ -99,14 +101,14 @@ class ProductDetail extends Component {
           </Card>
           <Card containerStyle={[styles.cardMargin, styles.marginBottom]}>
             <Text>Nguồn gốc sản phẩm: {product.origin}</Text>
-            <Text>Cửa hàng: {product.shop}</Text>
+            <Text>Cửa hàng: {product.shop.name}</Text>
           </Card>
           <Card
             containerStyle={[styles.cardMargin, styles.marginBottom]}
             title="Đánh giá"
           >
             {
-              product.comments ? <Comment comments={product.comments}/> :
+              product.comments.length ? <Comment comments={product.comments}/> :
                 <Text style={styles.aligncenter} >Hiện chưa có đánh giá nào cho sản phẩm</Text>
             }
           </Card>
@@ -115,7 +117,7 @@ class ProductDetail extends Component {
             title="Bình luận"
           >
             {
-              product.comments ? <Comment comments={product.comments}/> :
+              product.comments.length ? <Comment comments={product.comments}/> :
                 <Text style={styles.aligncenter} >Hiện chưa có bình luận nào cho sản phẩm</Text>
             }
             <Button
@@ -134,43 +136,6 @@ class ProductDetail extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  slide: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#e8ebef',
-    padding: 0,
-    margin: 0,
-  },
-  text: {
-    fontSize: 30,
-    color: 'red',
-    fontStyle: 'italic',
-  },
-  productName: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  cardMargin: {
-    margin: 0,
-  },
-  marginBottom: {
-    marginBottom: 10,
-  },
-  rating: {
-    marginTop: 10,
-  },
-  aligncenter: {
-    textAlign: 'center',
-  }
-})
 
 mapStateToProps = state => ({
   product: state.product,
