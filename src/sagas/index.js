@@ -1,7 +1,7 @@
 import { call, all } from 'redux-saga/effects'
 import { watchFetchUser } from './profile';
 import { watchFetchProducts, watchFetchProductDetail } from './product'
-import { watchFetchPromotions } from './promotion'
+import { watchFetchPromotions, watchFetchPromotion } from './promotion'
 import { watchFetchCategories, watchFetchCategory } from './category'
 import { watchFetchProductsOrder} from './order-product'
 import { watchFetchCart, watchAddToCart, watchChangeQuantity, watchRemoveItem } from './cart'
@@ -20,6 +20,7 @@ export default function* rootSaga() {
     call(watchFetchProductDetail),
     call(watchFetchProductsOrder),
     call(watchLogin),
-    call(watchFetchCategory)
+    call(watchFetchCategory),
+    call(watchFetchPromotion),
   ])
 }

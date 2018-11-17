@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { products, product } from './product'
-import promotions from './promotion'
+import { promotions, promotion } from './promotion'
 import { categories, category } from './category'
 import cart from './cart'
 import profile from './profile'
@@ -17,6 +17,7 @@ const rootReducer = combineReducers({
   user: profile,
   order_products: order_product,
   app,
+  promotion,
 })
 
 export default rootReducer

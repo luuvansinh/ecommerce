@@ -2,7 +2,15 @@ import { put, takeLatest, call } from 'redux-saga/effects'
 import { ApiConst } from '../configs'
 import { request } from '../utils'
 
+/**
+ * ***************************
+ * FUNCTION
+ * ***************************
+ */
 
+/**
+ * Fetch promotions in home screen
+ */
 function* fetchPromotions() {
   const api = ApiConst.promotion.all()
   const response = yield call(request.call, api.url)
@@ -14,10 +22,36 @@ function* fetchPromotions() {
   })
 }
 
+/**
+ * Fetch promotion detail
+ */
+function* fetchPromotion({ promotionId }) {
+  const api = ApiConst.promotion.show(promotionId)
+  const response = yield call(request.call, api.url)
+  console.log(response)
+  const { promotion } = response.result
+  yield put({
+    type: 'FETCH_PROMOTION_SUCCEEDED',
+    payload: promotion
+  })
+}
+
+
+/**
+ * ***************************
+ * WATCHER
+ * ***************************
+ */
+
 function* watchFetchPromotions() {
   yield takeLatest('FETCH_PROMOTIONS', fetchPromotions)
 }
 
+function* watchFetchPromotion() {
+  yield takeLatest('FETCH_PROMOTION', fetchPromotion)
+}
+
 export {
   watchFetchPromotions,
+  watchFetchPromotion,
 }

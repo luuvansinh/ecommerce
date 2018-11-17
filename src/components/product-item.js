@@ -20,7 +20,6 @@ class ProductItem extends Component {
   render() {
     const { product } = this.props
     const image = (product.images && product.images.length) ? product.images[0] : ''
-    console.log(image)
     return (
       <TouchableHighlight onPress={this.onPressItem}>
         <View style={style.listViewItem}>

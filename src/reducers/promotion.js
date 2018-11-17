@@ -8,4 +8,16 @@ const promotions = (promotions = [], action) => {
   }
 }
 
-export default promotions
+const promotion = (promotion = null, { type, payload }) => {
+  switch (type) {
+    case 'FETCH_PROMOTION_SUCCEEDED':
+      return payload
+    default:
+      return promotion
+  }
+}
+
+export {
+  promotions,
+  promotion,
+}

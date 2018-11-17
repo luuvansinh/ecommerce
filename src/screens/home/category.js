@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, TouchableHighlight, ImageBackground, View } from 'react-native'
+import { Text, StyleSheet, TouchableHighlight, ImageBackground } from 'react-native'
 import GridView from 'react-native-super-grid'
 import { ApiConst } from '../../configs';
 

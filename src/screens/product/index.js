@@ -6,6 +6,7 @@ import { Card, Rating, Button } from 'react-native-elements'
 import { IconLoading, Comment, HeaderBar } from '../../components'
 import CommentDialog from './comment-dialog';
 import styles from './style'
+import { ApiConst } from '../../configs';
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -59,7 +60,7 @@ class ProductDetail extends Component {
     if (!product) {
       return <IconLoading />
     }
-    console.log('product', product)
+    const image = (product.images && product.images.length) ? ApiConst.host + product.images[0] : ''
     return (
       <ScrollView>
         <Swiper
@@ -69,7 +70,7 @@ class ProductDetail extends Component {
         >
           {
             product.images.map((item, index) => (
-              <ImageBackground key={index} source={{ uri: item }} style={styles.slide} />
+              <ImageBackground key={index} source={{ uri: image }} style={styles.slide} />
             ))
           }
         </Swiper>

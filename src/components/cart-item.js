@@ -3,14 +3,16 @@ import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight } from 're
 import { Avatar } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { format } from '../utils'
+import { ApiConst } from '../configs';
 
 class CartItem extends Component {
   render() {
     const { product, onChangeQuantity, onRemoveItem } = this.props
+    const image = (product.images && product.images.length) ? ApiConst.host + product.images[0] : ''
     return (
       <View style={style.listViewItem}>
         <Avatar
-          source={{ uri: product.image }}
+          source={{ uri: image }}
           large
         />
         <View style={style.centerItem}>

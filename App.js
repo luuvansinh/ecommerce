@@ -3,11 +3,12 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import ProfileView from './src/screens/profile'
 import HomeView from './src/screens/home'
 import CartView from './src/screens/cart'
-import ProductView from './src/screens/product'
+import Product from './src/screens/product'
 import OrderHistory from './src/screens/order-history'
 import Login from './src/screens/login'
-import SignUpView from './src/screens/register'
+import SignUp from './src/screens/register'
 import Category from './src/screens/category'
+import Promotion from './src/screens/promotion'
 
 const BottomTabs = createBottomTabNavigator(
   {
@@ -49,11 +50,12 @@ class DefaultScreen extends React.Component {
 const RootStack = createStackNavigator(
   {
     Home: DefaultScreen,
-    Product: ProductView,
+    Product,
     OrderHistory,
     Login,
-    SignUp: SignUpView,
+    SignUp,
     Category,
+    Promotion
   },
   {
     initialRouteName: 'Home',

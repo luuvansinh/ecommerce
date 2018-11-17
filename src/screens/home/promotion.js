@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Swiper from 'react-native-swiper'
 import { StyleSheet, Dimensions, ImageBackground, Text, TouchableOpacity } from 'react-native'
+import { ApiConst } from '../../configs';
 
 class PromotionList extends Component {
   render() {
@@ -14,10 +15,10 @@ class PromotionList extends Component {
       >
         {
           promotions.map(item => (
-            <ImageBackground key={item.id} source={{ uri: 'https://picsum.photos/300/200/?image=280' }} style={styles.slide}>
+            <ImageBackground key={item.id} source={{ uri: item.image ? ApiConst.host + item.image : '' }} style={styles.slide}>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Login')
+                  navigation.navigate('Promotion', { promotionId: item.id, name: item.name })
                 }}
               >
               <Text style={styles.text}>{item.name}</Text>

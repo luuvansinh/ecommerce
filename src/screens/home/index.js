@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { StyleSheet, FlatList, RefreshControl } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'

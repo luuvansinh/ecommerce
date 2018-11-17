@@ -3,7 +3,7 @@ import { Text, View, FlatList, ScrollView, StyleSheet } from 'react-native'
 import { Header, Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import { connect } from 'react-redux'
-import { CartItem, IconLoading, HeaderBar, CartBadge } from '../../components'
+import { CartItem, HeaderBar, CartBadge } from '../../components'
 import { format } from '../../utils'
 
 class CartView extends React.Component {
