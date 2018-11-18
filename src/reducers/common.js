@@ -1,8 +1,10 @@
-
-const app = (userInfo = null, action) => {
-  switch (action.type) {
+const app = (userInfo = { user: null, isLoggedIn: false }, { payload, type }) => {
+  switch (type) {
     case 'LOGIN_SUCCEEDED':
-      return action.userInfo
+      return {
+        ...userInfo,
+        ...payload,
+      }
     default:
       return userInfo
   }

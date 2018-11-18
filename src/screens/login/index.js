@@ -10,36 +10,36 @@ class LoginView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: 'customer',
+      email: 'customer@gmail.com',
       password: '12345678',
     }
   }
 
   login = () => {
-    const { username, password } = this.state
+    const { email, password } = this.state
     const { navigation, dispatch } = this.props
     dispatch({
       type: 'LOGIN',
       navigation,
       payload: {
-        username,
+        email,
         password,
       }
     })
   }
 
   render() {
-    const { username, password } = this.state
+    const { email, password } = this.state
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <Image style={[styles.icon, styles.inputIcon]} source={{uri: 'https://png.icons8.com/password/androidL/40/3498db'}}/>
           <TextInput style={styles.inputs}
-            placeholder="Username"
+            placeholder="email"
             keyboardType="email-address"
             underlineColorAndroid='transparent'
-            onChangeText={(text) => this.setState({ username: text })}
-            value={username}
+            onChangeText={(text) => this.setState({ email: text })}
+            value={email}
           />
         </View>
         <View style={styles.inputContainer}>

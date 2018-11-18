@@ -9,6 +9,7 @@ import Login from './src/screens/login'
 import SignUp from './src/screens/register'
 import Category from './src/screens/category'
 import Promotion from './src/screens/promotion'
+import Checkout from './src/screens/checkout'
 
 const BottomTabs = createBottomTabNavigator(
   {
@@ -55,7 +56,8 @@ const RootStack = createStackNavigator(
     Login,
     SignUp,
     Category,
-    Promotion
+    Promotion,
+    Checkout,
   },
   {
     initialRouteName: 'Home',

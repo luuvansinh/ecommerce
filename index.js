@@ -10,6 +10,7 @@ import {name as appName} from './app.json'
 
 import rootReducer from './src/reducers'
 import rootSaga from './src/sagas'
+import 'react-native-async-storage-dev-menu-item'
 
 const sagaMiddleWare = createSagaMiddleWare()
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleWare))

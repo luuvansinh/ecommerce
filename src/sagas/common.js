@@ -16,11 +16,14 @@ function* login({ payload, navigation }) {
       { text: 'OK' }
     ])
   }
-  const { result } = response
-  yield AsyncStorage.setItem(AppConst.asyncStorage.authKey, result.token)
+  const { result: { token, user } } = response
+  yield AsyncStorage.setItem(AppConst.asyncStorage.authKey, token)
   yield put({
     type: 'LOGIN_SUCCEEDED',
-    userInfo: result.user,
+    payload: {
+      user,
+      isLoggedIn: !!token,
+    }
   })
   yield call(navigation.navigate, 'Profile')
 }

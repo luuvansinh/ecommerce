@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
 import { Avatar, Button, Rating } from 'react-native-elements'
 import { format } from '../utils'
-import { ApiConst } from '../configs'
+import { ApiConst, ImageConst } from '../configs'
 
 class ProductItem extends Component {
   onPressItem = () => {
@@ -19,7 +19,7 @@ class ProductItem extends Component {
   }
   render() {
     const { product } = this.props
-    const image = (product.images && product.images.length) ? product.images[0] : ''
+    const image = (product.images && product.images.length) ? product.images[0] : ImageConst.defaultImage
     return (
       <TouchableHighlight onPress={this.onPressItem}>
         <View style={style.listViewItem}>

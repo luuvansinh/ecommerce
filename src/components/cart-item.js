@@ -3,12 +3,12 @@ import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight } from 're
 import { Avatar } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { format } from '../utils'
-import { ApiConst } from '../configs';
+import { ApiConst, ImageConst } from '../configs';
 
 class CartItem extends Component {
   render() {
-    const { product, onChangeQuantity, onRemoveItem } = this.props
-    const image = (product.images && product.images.length) ? ApiConst.host + product.images[0] : ''
+    const { product, onChangeQuantity, onRemoveItem, editable = true } = this.props
+    const image = (product.images && product.images.length) ? ApiConst.host + product.images[0] : ImageConst.defaultImage
     return (
       <View style={style.listViewItem}>
         <Avatar
@@ -21,7 +21,9 @@ class CartItem extends Component {
             <Text style={style.content}>{format.number(product.price)} đ/kg</Text>
           </View>
         </View>
-        <View style={style.rightItem}>
+        {
+          editable &&
+          <View style={style.rightItem}>
           <TouchableOpacity
             onPress={() => {
               onRemoveItem(product.id)
@@ -54,6 +56,7 @@ class CartItem extends Component {
             </TouchableHighlight>
           </View>
         </View>
+        }
       </View>
     )
   }

@@ -36,7 +36,6 @@ class HomeView extends React.Component {
     if (!products.length && !promotions.length && !categories.length) {
       return <IconLoading />
     }
-    console.log('products', products)
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <SearchBar

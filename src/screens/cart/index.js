@@ -1,10 +1,11 @@
 import React from 'react'
-import { Text, View, FlatList, ScrollView, StyleSheet } from 'react-native'
+import { Text, View, FlatList, ScrollView } from 'react-native'
 import { Header, Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import { connect } from 'react-redux'
 import { CartItem, HeaderBar, CartBadge } from '../../components'
 import { format } from '../../utils'
+import style from './style'
 
 class CartView extends React.Component {
   handleChangeQuantity = (productId, value) => {
@@ -23,10 +24,7 @@ class CartView extends React.Component {
   }
 
   render() {
-    const { cart } = this.props
-    if (!cart.length) {
-      return <Text>Giỏ hàng của bạn đang trống</Text>
-    }
+    const { cart, navigation } = this.props
     const total = cart.length ? cart.map(item => item.quantity * item.price)
       .reduce((previous, current) => previous + current) : 0
 
@@ -41,7 +39,9 @@ class CartView extends React.Component {
             hasCart={false}
           />
         </Header>
-        <ScrollView style={style.cartList}>
+        {
+          cart.length ?
+          <ScrollView style={style.cartList}>
           <FlatList
             data={cart}
             renderItem={({ item }) => (
@@ -61,25 +61,16 @@ class CartView extends React.Component {
             title="Thanh toán"
             borderRadius={20}
             backgroundColor="#e01a2e"
+            onPress={() => navigation.navigate('Checkout')}
           />
         </ScrollView>
+        :
+        <Text style={style.textMessage}>Giỏ hàng của bạn đang trống</Text>
+        }
       </SafeAreaView>
     )
   }
 }
-
-const style = StyleSheet.create({
-  cartList: {
-    marginBottom: 80,
-  },
-  textRight: {
-    textAlign: 'right',
-    fontSize: 20,
-    padding: 12,
-    color: '#ff2e63',
-    fontStyle: 'italic',
-  }
-})
 
 CartView.navigationOptions = {
   tabBarLabel: 'Giỏ hàng',

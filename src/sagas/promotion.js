@@ -14,7 +14,6 @@ import { request } from '../utils'
 function* fetchPromotions() {
   const api = ApiConst.promotion.all()
   const response = yield call(request.call, api.url)
-  // console.log('response', response)
   const { result } = response
   yield put({
     type: 'FETCH_PROMOTIONS_SUCCEEDED',
@@ -28,7 +27,6 @@ function* fetchPromotions() {
 function* fetchPromotion({ promotionId }) {
   const api = ApiConst.promotion.show(promotionId)
   const response = yield call(request.call, api.url)
-  console.log(response)
   const { promotion } = response.result
   yield put({
     type: 'FETCH_PROMOTION_SUCCEEDED',
