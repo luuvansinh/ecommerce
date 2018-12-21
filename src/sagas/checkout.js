@@ -10,7 +10,8 @@ import { request, storage } from '../utils'
  */
 
 function* createOrder({ payload, navigation }) {
-  const api = ApiConst.order_product.create()
+  const { isLoggedIn } = yield select(state => state.app)
+  const api = isLoggedIn ? ApiConst.order_product.create() : ApiConst.order_product.orderNoLogin()
   const products = yield select(state => state.cart)
   const response = yield call(request.call, api.url, {
     method: api.method,

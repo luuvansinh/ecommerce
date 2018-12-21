@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import { CartItem, Input } from '../../components'
 import { format, helper } from '../../utils'
 
-class FormInfo extends Component {
+class                                                                                                                                                          FormInfo extends Component {
   handleSubmit = (values) => {
     this.props.dispatch({
       type: 'CREATE_ORDER',
@@ -22,16 +22,16 @@ class FormInfo extends Component {
 
   render() {
     const { cart, user } = this.props
-    if (!user) {
-      return null
-    }
+    // if (!user) {
+    //   return null
+    // }
     return (
       <ScrollView>
         <Formik
           initialValues={{
-            name: user.fullname,
-            address: user.address,
-            phone: user.phone,
+            name: user ? user.fullname : '',
+            address: user ? user.address : '',
+            phone: user ? user.phone : '',
           }}
           onSubmit={this.handleSubmit}
           validationSchema={Yup.object().shape({

@@ -10,9 +10,9 @@ class CheckoutView extends Component {
 
   render() {
     const { cart, app: { user }, dispatch, navigation } = this.props
-    if (!user) {
-      return null
-    }
+    // if (!user) {
+    //   return null
+    // }
     return (
       <ScrollView>
         <FormInfo

@@ -28,6 +28,10 @@ function* fetchPromotion({ promotionId }) {
   const api = ApiConst.promotion.show(promotionId)
   const response = yield call(request.call, api.url)
   const { result } = response
+  result.products = result.products.map((product => {
+    product.images = product.images.map(item => item.path)
+    return product
+  }))
   yield put({
     type: 'FETCH_PROMOTION_SUCCEEDED',
     promotion: result,

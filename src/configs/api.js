@@ -83,5 +83,9 @@ export default {
       url: `/orders/${id}/cancel`,
       method: METHODS.put,
     }),
+    orderNoLogin: () => ({
+      url: '/ordersNologin',
+      method: METHODS.post,
+    }),
   }
 }

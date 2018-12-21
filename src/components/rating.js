@@ -7,8 +7,9 @@ import {
   FlatList
 } from 'react-native'
 import { ImageConst } from '../configs';
+import { Rating } from 'react-native-elements';
 
-export default class Rating extends Component {
+export default class Ratings extends Component {
   render() {
     const { ratings } = this.props
     return (
@@ -29,11 +30,16 @@ export default class Rating extends Component {
               <Image style={styles.image} source={{uri: ImageConst.defaultAvatar}}/>
               <View style={styles.content}>
                 <View style={styles.contentHeader}>
-                  <Text  style={styles.name}>{item.user ? item.user.username : 'Anonymous'}</Text>
+                  <Text  style={styles.name}>{item.user ? item.user.fullname : 'Anonymous'}</Text>
                   <Text style={styles.time}>
                     {item.createdAt}
                   </Text>
                 </View>
+                <Rating
+                  imageSize={10}
+                  startingValue={item.stars}
+                  readonly
+                />
                 <Text rkType='primary3 mediumLine'>{item.content}</Text>
               </View>
             </View>

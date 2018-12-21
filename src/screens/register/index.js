@@ -15,16 +15,16 @@ class SignUpView extends Component {
     super(props);
     this.state = {
       username: 'abc',
-      fullname: 'abc',
-      email   : 'abc@gmail.com',
-      password: '12345678',
-      address: 'Da nang',
-      phone: '0766530199',
+      fullname: '',
+      email   : '',
+      password: '',
+      address: '',
+      phone: '',
       gender: 1,
     }
   }
 
-  onClickListener = () => {
+  register = () => {
     const { dispatch, navigation } = this.props
     dispatch({
       type: 'REGISTER',
@@ -35,6 +35,7 @@ class SignUpView extends Component {
 
   render() {
     const { fullname, email, password, address, phone, gender } = this.state
+    const { navigation } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -90,8 +91,11 @@ class SignUpView extends Component {
           <RadioItem>Nữ</RadioItem>
         </View> */}
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-          <Text style={styles.signUpText}>Sign up</Text>
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={this.register}>
+          <Text style={styles.signUpText}>Đăng ký</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => navigation.navigate('Login') }>
+          <Text style={styles.signUpText}>Đăng nhập</Text>
         </TouchableHighlight>
       </View>
     );

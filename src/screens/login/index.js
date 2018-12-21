@@ -10,8 +10,8 @@ class LoginView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: 'customer@gmail.com',
-      password: '12345678',
+      email: '',
+      password: '',
     }
   }
 
@@ -30,6 +30,7 @@ class LoginView extends Component {
 
   render() {
     const { email, password } = this.state
+    const { navigation } = this.props
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -52,18 +53,17 @@ class LoginView extends Component {
             value={password}
           />
         </View>
-        <TouchableOpacity
-          style={styles.restoreButtonContainer}
-        >
-            <Text>Quên mật khẩu ?</Text>
-        </TouchableOpacity>
+        
         <TouchableOpacity
           style={[styles.buttonContainer, styles.loginButton]}
           onPress={this.login}
         >
           <Text style={styles.loginText}>Đăng nhập</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.buttonContainer, styles.registerButton]}>
+        <TouchableOpacity
+          style={[styles.buttonContainer, styles.registerButton]}
+          onPress={() => navigation.navigate('SignUp') }
+        >
           <Text style={styles.loginText}>Đăng ký tài khoản mới</Text>
         </TouchableOpacity>
       </View>
