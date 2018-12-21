@@ -8,13 +8,13 @@ import {
 } from 'react-native'
 import { ImageConst } from '../configs';
 
-export default class Comments extends Component {
+export default class Rating extends Component {
   render() {
-    const { comments } = this.props
+    const { ratings } = this.props
     return (
       <FlatList
         style={styles.root}
-        data={comments}
+        data={ratings}
         ItemSeparatorComponent={() => {
           return (
             <View style={styles.separator}/>

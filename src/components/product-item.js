@@ -33,7 +33,7 @@ class ProductItem extends Component {
               <Text style={style.content}>{format.number(product.price)} đ/kg</Text>
               <Rating
                 imageSize={10}
-                startingValue={product.rating}
+                startingValue={product.avg_ratings}
                 readonly
               />
             </View>

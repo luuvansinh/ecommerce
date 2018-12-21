@@ -36,8 +36,8 @@ export default {
       method: METHODS.get
     }),
     comment: () => ({
-      url: 'comments',
-      method: METHODS.get,
+      url: '/comments',
+      method: METHODS.post,
     }),
   },
 

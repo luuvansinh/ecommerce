@@ -1,4 +1,5 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects'
+import { Alert } from 'react-native';
 import { request } from '../utils'
 import { ApiConst } from '../configs'
 
@@ -62,7 +63,18 @@ function* comment({ payload }) {
     method: api.method,
     body: payload,
   })
-  console.log({ response })
+  // console.log({ response })
+  const { success, result, error } = response
+  if (!success) {
+    return Alert.alert('Oops', error)
+  }
+  const { product } = yield select(state => state)
+  product.comments.push(result)
+  console.log({ product })
+  yield put({
+    type: 'PRODUCT_DETAIL',
+    product,
+  })
 }
 
 /**

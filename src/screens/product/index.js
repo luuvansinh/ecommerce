@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, ScrollView, Dimensions, ImageBackground, View } from 'react-native'
+import { Text, ScrollView, Dimensions, ImageBackground, View, StyleSheet, TextInput } from 'react-native'
 import Swiper from 'react-native-swiper'
 import { connect } from 'react-redux'
 import { Card, Rating, Button } from 'react-native-elements'
-import { IconLoading, Comment, HeaderBar } from '../../components'
-import CommentDialog from './comment-dialog';
+import { Modal } from 'antd-mobile-rn'
+import { IconLoading, Comment, HeaderBar, Ratings } from '../../components'
 import styles from './style'
-import { ApiConst } from '../../configs';
-import { format } from '../../utils';
+import { format } from '../../utils'
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -27,6 +26,7 @@ class ProductDetail extends Component {
     super(props)
     this.state = {
       visibleDialog: false,
+      content: '',
     }
   }
 
@@ -50,9 +50,22 @@ class ProductDetail extends Component {
       navigation.setParams({ title: product.name })
     }
   }
+
+  onSubmit = () => {
+    const { content } = this.state
+    const { dispatch, product } = this.props
+    dispatch({
+      type: 'COMMENT',
+      payload: {
+        content,
+        product_id: product.id,
+      },
+    })
+  }
   
-  hideDialog = () => {
-    this.setState({ visibleDialog: false })
+  toggle = () => {
+    const { visibleDialog } = this.state
+    this.setState({ visibleDialog: !visibleDialog })
   }
 
   render() {
@@ -61,7 +74,11 @@ class ProductDetail extends Component {
     if (!product) {
       return <IconLoading />
     }
-    // const image = (product.images && product.images.length) ? ApiConst.host + product.images[0] : ''
+    const { content } = this.state
+    const footerButtons = [
+      { text: 'Cancel', onPress: () => this.setState({ visibleDialog: false }) },
+      { text: 'Ok', onPress: () => this.onSubmit() },
+    ];
     return (
       <ScrollView>
         <Swiper
@@ -110,7 +127,7 @@ class ProductDetail extends Component {
             title="Đánh giá"
           >
             {
-              product.comments.length ? <Comment comments={product.comments}/> :
+              product.ratings.list.length ? <Ratings ratings={product.ratings.list}/> :
                 <Text style={styles.aligncenter} >Hiện chưa có đánh giá nào cho sản phẩm</Text>
             }
           </Card>
@@ -127,12 +144,28 @@ class ProductDetail extends Component {
               borderRadius={20}
               backgroundColor="green"
               containerViewStyle={{ marginTop: 10 }}
-              onPress={() => {
-                this.setState({ visibleDialog: true })
-              }}
+              onPress={() => this.setState({ visibleDialog: true })}
             />
           </Card>
-          <CommentDialog visible={visibleDialog} hideDialog={this.hideDialog} />
+          <Modal
+            title="Thêm bình luận"
+            transparent
+            onClose={() => this.setState({ visibleDialog: false })}
+            maskClosable
+            visible={visibleDialog}
+            closable
+            footer={footerButtons}
+          >
+            <View style={style.textAreaContainer}>
+              <TextInput
+                style={style.textArea}
+                multiline={true}
+                numberOfLines={4}
+                value={content}
+                onChangeText={content => this.setState({ content })}
+              />
+            </View>
+          </Modal>
         </View>
       </ScrollView>
     )
@@ -142,5 +175,29 @@ class ProductDetail extends Component {
 mapStateToProps = state => ({
   product: state.product,
 })
+
+const style = StyleSheet.create({
+  textAreaContainer: {
+    borderColor: 'red',
+    backgroundColor: '#FFFFFF',
+    borderRadius:30,
+    borderBottomWidth: 1,
+    width:250,
+    height:45,
+    marginBottom:15,
+    flexDirection: 'row',
+    alignItems:'center'
+  },
+  textArea: {
+    height:45,
+    marginLeft:16,
+    borderBottomColor: '#FFFFFF',
+    flex:1,
+  },
+  closeBtn: {
+    marginTop: 10,
+  }
+})
+
 
 export default connect(mapStateToProps)(ProductDetail)

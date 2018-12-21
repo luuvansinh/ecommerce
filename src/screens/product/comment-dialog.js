@@ -11,11 +11,10 @@ class CommentDialog extends Component {
     }
   }
   comment = () => {
-    this.props.dispatch({
-      type: 'COMMENT',
-      payload: {
-        content: this.state.text,
-      }
+    const { onSubmit, product } = this.props
+    onSubmit({
+      content: this.state.text,
+      product_id: product.id,
     })
   }
   render() {
