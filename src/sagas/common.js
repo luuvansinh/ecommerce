@@ -67,7 +67,7 @@ function* logout() {
   })
 }
 
-function* register({ payload }) {
+function* register({ payload, navigation }) {
   const api = ApiConst.common.register()
   const response = yield call(request.call, api.url, {
     method: api.method,
@@ -92,6 +92,7 @@ function* register({ payload }) {
       },
     }
   })
+  yield call(navigation.navigate, 'Home')
 }
 
 /**

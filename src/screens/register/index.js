@@ -25,9 +25,11 @@ class SignUpView extends Component {
   }
 
   onClickListener = () => {
-    this.props.dispatch({
+    const { dispatch, navigation } = this.props
+    dispatch({
       type: 'REGISTER',
       payload: this.state,
+      navigation,
     })
   }
 

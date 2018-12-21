@@ -96,11 +96,10 @@ class InfoView extends React.Component {
               marginLeft= {2}
               name="receipt"
             />
-            <Text style={style.ActionText}>Đơn hàng của tôi</Text>
+            <Text style={style.ActionText}>Đơn hàng của tôi ({orders.length})</Text>
           </View>
         </View>
         <FlatList
-          // style={style.listView}
           data={orders}
           renderItem={({ item }) => (
             <OrderItem order={item} />
