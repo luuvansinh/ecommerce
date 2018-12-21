@@ -1,70 +1,107 @@
 import React, { Component } from 'react'
-import { Alert } from 'react-native'
-import { List, InputItem, Button } from 'antd-mobile-rn'
-import { createForm } from 'rc-form'
+import { List, Button } from 'antd-mobile-rn'
+import { Text, View, ScrollView, FlatList } from 'react-native'
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+import { CartItem, Input } from '../../components'
+import { format, helper } from '../../utils'
 
-export class FormInfo extends Component {
-  onSubmit = () => {
-    this.props.form.validateFields({ force: true }, (error) => {
-      if (!error) {
-        // TODO: submit form
-        console.log(this.props.form.getFieldsValue())
-      } else {
-        Alert.alert('Thông báo',error[Object.keys(error)[0]].errors[0].message)
+class FormInfo extends Component {
+  handleSubmit = (values) => {
+    this.props.dispatch({
+      type: 'CREATE_ORDER',
+      navigation: this.props.navigation,
+      payload: {
+        ...values,
+        full_name: values.name,
+        payment_method_id: 1,
+        delivery_time: '2018-12-30',
       }
     })
   }
 
   render() {
-    const { getFieldProps } = this.props.form
+    const { cart, user } = this.props
+    if (!user) {
+      return null
+    }
     return (
-      <List
-        renderHeader={() => 'Thông tin người nhận'}
-      >
-        <InputItem
-          {...getFieldProps('name', {
-            rules: [
-              { required: true, message: 'Vui lòng điền họ tên!' }
-            ],
+      <ScrollView>
+        <Formik
+          initialValues={{
+            name: user.fullname,
+            address: user.address,
+            phone: user.phone,
+          }}
+          onSubmit={this.handleSubmit}
+          validationSchema={Yup.object().shape({
+            name: Yup.string().required('Tên không được trống'),
+            address: Yup.string().required('Địa chỉ không được trống'),
+            phone: Yup.string().required('SĐT không được trống'),
           })}
-          placeholder=""
-        >
-          Họ tên *
-        </InputItem>
-        <InputItem
-          {...getFieldProps('address', {
-            rules: [
-              { required: true, message: 'Vui lòng nhập địa chỉ!' }
-            ],
-          })}
-          placeholder=""
-        >
-          Địa chỉ *
-        </InputItem>
-        <InputItem
-          {...getFieldProps('phone', {
-            rules: [
-              { required: true, message: 'Vui lòng nhập sđt!' }
-            ],
-          })}
-          placeholder=""
-        >
-          SĐT *
-        </InputItem>
-        <InputItem
-          {...getFieldProps('note', {
-            rules: [],
-          })}
-          placeholder=""
-        >
-          Ghi chú
-        </InputItem>
-        <List.Item>
-          <Button type="primary" onClick={this.onSubmit}>Xác nhận</Button>
-        </List.Item>
-      </List>
+          render={({ values, setFieldValue, errors, handleSubmit }) => {
+            return (
+              <List
+                renderHeader={() => 'Thông tin người nhận'}
+              >
+                <Input
+                  label="Họ tên"
+                  value={values.name}
+                  onChange={setFieldValue}
+                  name="name"
+                  error={errors.name}
+                />
+                <Input
+                  label="Địa chỉ"
+                  value={values.address}
+                  onChange={setFieldValue}
+                  name="address"
+                  error={errors.address}
+                />
+                <Input
+                  label="SĐT"
+                  value={values.phone}
+                  onChange={setFieldValue}
+                  name="phone"
+                  error={errors.phone}
+                />
+                <Input
+                  label="Ghi chú"
+                  onChange={setFieldValue}
+                  name="note"
+                />
+                <List.Item>
+                  <Text style={{ fontSize: 16, color: 'black', marginBottom: 10 }}>Thông tin đơn hàng</Text>
+                  <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text>{cart.length} Sản phẩm</Text>
+                    <Text>{format.number(helper.calculateTotal(cart))} đ</Text>
+                  </View>
+                </List.Item>
+                <List.Item>
+                  <FlatList
+                    data={cart}
+                    renderItem={({ item }) => (
+                      <CartItem
+                        key={item.id}
+                        product={item}
+                        onChangeQuantity={this.handleChangeQuantity}
+                        onRemoveItem={this.handleRemoveItem}
+                        editable={false}
+                      />
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                  />
+                </List.Item>
+                <List.Item>
+                  <Button type="primary" onClick={handleSubmit}>Xác nhận</Button>
+                </List.Item>
+              </List>
+            )
+          }}
+        />
+      </ScrollView>
     )
   }
 }
 
-export default createForm()(FormInfo)
+export default FormInfo

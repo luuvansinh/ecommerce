@@ -1,21 +1,16 @@
 import React from 'react'
+import { ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
 import { Header } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { connect } from 'react-redux'
+import { List, Button } from 'antd-mobile-rn'
 import { HeaderBar } from '../../components'
 import InfoView from './info'
-import { List, Button } from 'antd-mobile-rn';
 
 class ProfileView extends React.Component {
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'FETCH_USER'
-    })
-  }
-
   render() {
-    const { navigation, app: { user, isLoggedIn } } = this.props
+    const { navigation, app: { user, isLoggedIn }, dispatch, orders } = this.props
     return (
       <SafeAreaView forceInset={{ horizontal: 'always', top: 'always' }}>
         <Header
@@ -27,8 +22,15 @@ class ProfileView extends React.Component {
             navigation={navigation}
           />
         </Header>
+        <ScrollView>
         {
-          isLoggedIn ? <InfoView user={user} />
+          isLoggedIn ? (
+            <InfoView
+              dispatch={dispatch}
+              user={user}
+              orders={orders}
+            />
+          )
           :
           <List>
             <List.Item>
@@ -45,6 +47,7 @@ class ProfileView extends React.Component {
             </List.Item>
           </List>
         }
+        </ScrollView>
       </SafeAreaView>
     )
   }
@@ -61,9 +64,10 @@ ProfileView.navigationOptions = {
   ),
 }
 
-const mapStateToProps = ({ user, app }) => ({
+const mapStateToProps = ({ user, app, orders }) => ({
   user,
   app,
+  orders,
 })
 
 

@@ -9,7 +9,6 @@ const METHODS = {
 export default {
   endPoint: 'https://greengrocer.herokuapp.com/api',
   host: 'https://greengrocer.herokuapp.com',
-  // endPointDev: 'https://greengrocer.herokuapp.com/api',
   methods: METHODS,
 
   common: {
@@ -17,7 +16,14 @@ export default {
       url: '/login',
       method: METHODS.post,
     }),
-    register: () => ({}),
+    register: () => ({
+      url: '/register',
+      method: METHODS.post,
+    }),
+    me: () => ({
+      url: '/userInfor',
+      method: METHODS.get,
+    }),
   },
 
   product: {
@@ -28,7 +34,11 @@ export default {
     show: (id) => ({
       url: `/products/${id}`,
       method: METHODS.get
-    })
+    }),
+    comment: () => ({
+      url: 'comments',
+      method: METHODS.get,
+    }),
   },
 
   category: {
@@ -38,7 +48,7 @@ export default {
     }),
     show: (id) => ({
       url: `/categories/${id}`,
-      method: METHODS.get, 
+      method: METHODS.get,
     }),
   },
 
@@ -62,8 +72,16 @@ export default {
 
   order_product: {
     all: () => ({
-      url: '/order-products',
+      url: '/orders',
       method: METHODS.get,
-    })
+    }),
+    create: () => ({
+      url: '/orders',
+      method: METHODS.post,
+    }),
+    cancel: id => ({
+      url: `/orders/${id}/cancel`,
+      method: METHODS.put,
+    }),
   }
 }

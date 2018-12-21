@@ -1,11 +1,12 @@
 import { call, all } from 'redux-saga/effects'
-import { watchFetchUser } from './profile';
-import { watchFetchProducts, watchFetchProductDetail } from './product'
+import { watchFetchUser, watchFetchOrders } from './profile';
+import { watchFetchProducts, watchFetchProductDetail, watchComment } from './product'
 import { watchFetchPromotions, watchFetchPromotion } from './promotion'
 import { watchFetchCategories, watchFetchCategory } from './category'
 import { watchFetchProductsOrder} from './order-product'
-import { watchFetchCart, watchAddToCart, watchChangeQuantity, watchRemoveItem } from './cart'
-import { watchLogin } from './common'
+import { watchFetchCart, watchAddToCart, watchChangeQuantity, watchRemoveItem, watchClear } from './cart'
+import { watchLogin, watchInit, watchLogout, watchRegister } from './common'
+import { watchCreateOrder } from './checkout'
 
 export default function* rootSaga() {
   yield all([
@@ -22,5 +23,12 @@ export default function* rootSaga() {
     call(watchLogin),
     call(watchFetchCategory),
     call(watchFetchPromotion),
+    call(watchInit),
+    call(watchCreateOrder),
+    call(watchClear),
+    call(watchLogout),
+    call(watchComment),
+    call(watchRegister),
+    call(watchFetchOrders),
   ])
 }

@@ -39,7 +39,7 @@ function* fetchProducts() {
       products: [...products,...data],
       filter: {
         total: paginator.total,
-        number_products: paginator.per_page,
+        perpage: paginator.per_page,
         page: paginator.current_page
       },
       refreshing: false
@@ -56,6 +56,15 @@ function* fetchProductDetail({ productId }) {
   })
 }
 
+function* comment({ payload }) {
+  const api = ApiConst.product.comment()
+  const response = yield call(request.call, api.url, {
+    method: api.method,
+    body: payload,
+  })
+  console.log({ response })
+}
+
 /**
  * ****************** WATCHER *****************
  */
@@ -68,7 +77,11 @@ function* watchFetchProductDetail() {
   yield takeLatest('FETCH_PRODUCT_DETAIL', fetchProductDetail)
 }
 
+function* watchComment() {
+  yield takeLatest('COMMENT', comment)
+}
 export {
   watchFetchProducts,
+  watchComment,
   watchFetchProductDetail,
 }

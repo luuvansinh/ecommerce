@@ -6,6 +6,7 @@ import HeaderBar from './header'
 import CartBadge from './cart-badge'
 import OfflineNotice from './offline-notice'
 import ProductOrder from './product-order'
+import Input from './input'
 
 export {
   ProductItem,
@@ -16,4 +17,5 @@ export {
   CartBadge,
   OfflineNotice,
   ProductOrder,
+  Input,
 }

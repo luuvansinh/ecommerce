@@ -8,7 +8,7 @@ import { ApiConst, ImageConst } from '../configs';
 class CartItem extends Component {
   render() {
     const { product, onChangeQuantity, onRemoveItem, editable = true } = this.props
-    const image = (product.images && product.images.length) ? ApiConst.host + product.images[0] : ImageConst.defaultImage
+    const image = (product.images && product.images.length) ? product.images[0] : ImageConst.defaultImage
     return (
       <View style={style.listViewItem}>
         <Avatar

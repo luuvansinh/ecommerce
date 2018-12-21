@@ -52,6 +52,10 @@ function* removeItem({ productId }) {
   yield call(updateCart, cart)
 }
 
+function* clearCart() {
+  yield call(storage.updateCart([]))
+}
+
 
 /**
  ************ WATCHER**********
@@ -74,9 +78,14 @@ function* watchRemoveItem() {
   yield takeLatest('REMOVE_ITEM', removeItem)
 }
 
+function* watchClear() {
+  yield takeLatest('CLEAR_ALL', clearCart)
+}
+
 export {
   watchFetchCart,
   watchAddToCart,
   watchChangeQuantity,
   watchRemoveItem,
+  watchClear,
 }

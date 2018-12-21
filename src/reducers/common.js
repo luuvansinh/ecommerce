@@ -10,4 +10,6 @@ const app = (userInfo = { user: null, isLoggedIn: false }, { payload, type }) =>
   }
 }
 
+// export const logout
+
 export default app

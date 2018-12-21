@@ -2,7 +2,7 @@
 const initProducts = {
   products: [],
   filter: {
-    number_products: 10,
+    perpage: 30,
     page: 0,
     total: 1,
   },

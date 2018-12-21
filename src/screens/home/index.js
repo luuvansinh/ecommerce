@@ -13,6 +13,7 @@ class HomeView extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props
     this.fetchData()
+    dispatch({ type: 'INIT' })
     dispatch({ type: 'FETCH_CART' })
   }
 
@@ -32,7 +33,7 @@ class HomeView extends React.Component {
   }
 
   render() {
-    const { products: { products, refreshing }, promotions, categories, dispatch, navigation } = this.props
+    const { products: { products }, promotions, categories, dispatch, navigation } = this.props
     if (!products.length && !promotions.length && !categories.length) {
       return <IconLoading />
     }
@@ -104,6 +105,7 @@ const mapStateToProps = state => ({
   products: state.products,
   promotions: state.promotions,
   categories: state.categories,
+  app: state.app,
 })
 
 export default connect(mapStateToProps)(HomeView)

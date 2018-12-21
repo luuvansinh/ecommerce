@@ -27,10 +27,10 @@ function* fetchPromotions() {
 function* fetchPromotion({ promotionId }) {
   const api = ApiConst.promotion.show(promotionId)
   const response = yield call(request.call, api.url)
-  const { promotion } = response.result
+  const { result } = response
   yield put({
     type: 'FETCH_PROMOTION_SUCCEEDED',
-    payload: promotion
+    promotion: result,
   })
 }
 

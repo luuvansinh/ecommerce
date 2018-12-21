@@ -3,6 +3,7 @@ import { Text, View, FlatList, ScrollView } from 'react-native'
 import { Header, Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-navigation'
 import { connect } from 'react-redux'
+import { Result } from 'antd-mobile-rn'
 import { CartItem, HeaderBar, CartBadge } from '../../components'
 import { format } from '../../utils'
 import style from './style'
@@ -65,7 +66,10 @@ class CartView extends React.Component {
           />
         </ScrollView>
         :
-        <Text style={style.textMessage}>Giỏ hàng của bạn đang trống</Text>
+        <Result
+          title="Giỏ hàng của bạn đang trống!"
+          message={<Button title="Mua hàng" onPress={() => navigation.navigate('Home')} />}
+        />
         }
       </SafeAreaView>
     )

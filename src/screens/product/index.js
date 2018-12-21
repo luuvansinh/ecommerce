@@ -7,6 +7,7 @@ import { IconLoading, Comment, HeaderBar } from '../../components'
 import CommentDialog from './comment-dialog';
 import styles from './style'
 import { ApiConst } from '../../configs';
+import { format } from '../../utils';
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -60,7 +61,7 @@ class ProductDetail extends Component {
     if (!product) {
       return <IconLoading />
     }
-    const image = (product.images && product.images.length) ? ApiConst.host + product.images[0] : ''
+    // const image = (product.images && product.images.length) ? ApiConst.host + product.images[0] : ''
     return (
       <ScrollView>
         <Swiper
@@ -70,13 +71,13 @@ class ProductDetail extends Component {
         >
           {
             product.images.map((item, index) => (
-              <ImageBackground key={index} source={{ uri: image }} style={styles.slide} />
+              <ImageBackground key={index} source={{ uri: item }} style={styles.slide} />
             ))
           }
         </Swiper>
         <View style={styles.container}>
           <Card containerStyle={[styles.cardMargin, styles.marginBottom]}>
-            <Text style={styles.text}>{product.price} đ/kg</Text>
+            <Text style={styles.text}>{format.number(product.price)} đ/kg</Text>
             <Text style={styles.productName}>{product.name}</Text>
             <View>
               <Rating
@@ -102,7 +103,7 @@ class ProductDetail extends Component {
           </Card>
           <Card containerStyle={[styles.cardMargin, styles.marginBottom]}>
             <Text>Nguồn gốc sản phẩm: {product.origin}</Text>
-            <Text>Cửa hàng: {product.shop.name}</Text>
+            <Text>Cửa hàng: {product.shop && product.shop.name}</Text>
           </Card>
           <Card
             containerStyle={[styles.cardMargin, styles.marginBottom]}

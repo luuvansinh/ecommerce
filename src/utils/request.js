@@ -2,7 +2,11 @@ import { AsyncStorage } from 'react-native'
 import { AppConst, ApiConst } from '../configs'
 
 const parseJSON = (response) => {
-  return JSON.parse(response._bodyInit)
+  const data = JSON.parse(response._bodyInit)
+  return {
+    ...data,
+    success: response.status < 400,
+  }
 }
 
 const serializeObject = (obj) => {

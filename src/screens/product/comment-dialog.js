@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { Dialog } from 'react-native-simple-dialogs'
-// import { Field, reduxForm } from 'redux-form'
 import { Button } from 'react-native-elements'
 
 class CommentDialog extends Component {
@@ -10,6 +9,14 @@ class CommentDialog extends Component {
     this.state = {
       text: ''
     }
+  }
+  comment = () => {
+    this.props.dispatch({
+      type: 'COMMENT',
+      payload: {
+        content: this.state.text,
+      }
+    })
   }
   render() {
     const { visible, hideDialog } = this.props
@@ -33,6 +40,7 @@ class CommentDialog extends Component {
         <Button
           title="Bình luận"
           backgroundColor="green"
+          onPress={this.comment}
         />
         <Button
           containerViewStyle={style.closeBtn}

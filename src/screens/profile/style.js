@@ -91,7 +91,12 @@ const style = StyleSheet.create({
 
   // style logout
   Logout: {
-    marginTop: 30
+    marginTop: 10,
+    marginBottom: 80,
+  },
+  listView: {
+    marginBottom: 60,
+    backgroundColor: 'white',
   }
 })
 

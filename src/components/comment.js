@@ -29,7 +29,7 @@ export default class Comments extends Component {
               <Image style={styles.image} source={{uri: ImageConst.defaultAvatar}}/>
               <View style={styles.content}>
                 <View style={styles.contentHeader}>
-                  <Text  style={styles.name}>{item.user.fullname}</Text>
+                  <Text  style={styles.name}>{item.user ? item.user : 'Anonymous'}</Text>
                   <Text style={styles.time}>
                     {item.createdAt}
                   </Text>
